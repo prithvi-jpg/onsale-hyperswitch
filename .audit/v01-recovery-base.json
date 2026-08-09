@@ -1,0 +1,225 @@
+{
+  "recordType": "onsale.v01-recovery-base.v1",
+  "createdAt": "2026-08-09",
+  "source": "/tmp/onsale-main-prototype-native-v01-final4",
+  "sourceRevision": "340e33651743920d8f8932b65bd40e9782e11ffd",
+  "policy": "The copied v0.1 experience is binding. Later logic may enter only through a narrowly tested adapter or runtime boundary. No experience file may change without a named bug and before-after browser proof.",
+  "protectedFiles": {
+    "src/App.tsx": "sha256:3c624e54db44751b00089469687d8d7e8706d66af5fbff51b1a073cd07c98c70",
+    "src/MechanismRail.tsx": "sha256:14f5aa28f442aa9bf21075b3756a17a77f3937c18bfaf1c5637cd99ccc18eb7a",
+    "src/PaymentTraceMap.tsx": "sha256:a3db305e849fab0f029cb7a1e40c7512e42d802d5b82c0e5897b14f31258f6fe",
+    "src/payment-trace/trace-geometry.ts": "sha256:2c52bfdc77c74c10f1decd735daae3a7ca19c06abeb21cea20bd540f19acef14",
+    "src/index.css": "sha256:6141b286e1948be0c375f961b26c5e1b0a4aba818afeb87e52c252a4e4ec0786",
+    "app/flows/FlowsGallery.tsx": "sha256:270ef509fb6907c45a1db36e651271bd5963e976846846e524ec68f9a8bc0913",
+    "app/flows/flows.module.css": "sha256:ccc7087e6a4f6ea3a99d1f96e218c67291e6f96c9a8928ade0040d650104cc22",
+    "app/flows/replay.ts": "sha256:78063a6650edef99f9fa69918ea99d5af0910d6ab8c110d36708ef3aac2d7909"
+  },
+  "allowedPorts": [
+    "canonical Next runtime and exact-origin/session repair",
+    "same-payment provider return continuity",
+    "sanitized current-run and Recorded Runs read model",
+    "bounded timeout and retry behavior"
+  ],
+  "forbiddenPorts": [
+    "v0.2 rail geometry or large node composition",
+    "v0.2 buyer layout replacement",
+    "simulation presented as recorded evidence",
+    "a cloned or fabricated provider approval page"
+  ],
+  "approval": {
+    "reference": "user:v01-complete-holistic-and-tested:2026-08-09",
+    "recordedAt": "2026-08-09",
+    "scope": "The approved recovery repairs preserve the v0.1 composition while repairing the exact named runtime, same-session return, exact Recorded Run selection, six-subject Story Lab, and evidence-linked rail motion."
+  },
+  "approvedBoundaryDeltas": [
+    {
+      "changeSetId": "v01-runtime-session-return",
+      "reason": "Make the pinned Linux Node 22.23.2 Next runtime at http://onsale-v01.localhost:4310 the exact default, retain one anonymous session and current-order pointer through provider return, and resume on clean /checkout without trusting query state.",
+      "approvalReference": "user:v01-complete-holistic-and-tested:2026-08-09",
+      "paths": [
+        {
+          "path": "package.json",
+          "changeKind": "modified",
+          "beforeSha256": "sha256:604c6f3de480b7dfec1431a32da7b73a9f03f5bd52aa2db50c2485b52644f0b3",
+          "afterSha256": "sha256:2fd4d3e716a28a16a790fa44e713dfba67bb04eb7d202b20ffde61f163e820e4"
+        },
+        {
+          "path": "next.config.ts",
+          "changeKind": "modified",
+          "beforeSha256": "sha256:802d6a9dd3d6e7f31330f4c5f73588258e8ac93a7978d0476b51b319222dd764",
+          "afterSha256": "sha256:1c6b9f5290e04e25d0084e51dcb1de5c50a7d73709891e147d11c5f37adc471b"
+        },
+        {
+          "path": "scripts/native-node22.sh",
+          "changeKind": "modified",
+          "beforeSha256": "sha256:a784e644fa948ab0f623e38f5e0622281acee6af256da1f03200bbd2431f9f7a",
+          "afterSha256": "sha256:65d3986e58417efa2ed2379f4d2ee14093eb2a37d93d35ddaa29685cee948411"
+        },
+        {
+          "path": "scripts/portless-local-preview.ts",
+          "changeKind": "added",
+          "beforeSha256": null,
+          "afterSha256": "sha256:fb48ef61cb41b35c8d4e23013883614a08e166d16df4b6884d881d0a981d5217"
+        },
+        {
+          "path": "scripts/local-preview-runtime.ts",
+          "changeKind": "added",
+          "beforeSha256": null,
+          "afterSha256": "sha256:956c093297a643779700153a640437f307a2065d4d5b70bf75eefde30c019b20"
+        },
+        {
+          "path": "src/server/onsale-session.ts",
+          "changeKind": "modified",
+          "beforeSha256": "sha256:a29ec5080f4ab96a64ea1488e9f7cc832770256c94ac950f04b179021133ee4f",
+          "afterSha256": "sha256:b5fd1047823e6ac70bc8d6ef4bff3c45e26d6abe05f6008ef9558cec56e4d4f9"
+        },
+        {
+          "path": "src/server/onsale-checkout-runtime.ts",
+          "changeKind": "modified",
+          "beforeSha256": "sha256:576616dc97306d99b062b4435b29b3249f1acbfbc25d733ce049a4aac7b63217",
+          "afterSha256": "sha256:74d8ef51de59290bb93a711036b2edcee35379b85b2a9e219123bfbba43fafb7"
+        },
+        {
+          "path": "src/server/onsale-checkout-route-runtime.ts",
+          "changeKind": "modified",
+          "beforeSha256": "sha256:cc872bca461f7c79d050875004e69c8b6576fc514728b2e2ef36e611f0c50b30",
+          "afterSha256": "sha256:54d8f3840a5e4c3e4cc085ed4f85caab138316d018446f326ab8277f5bfac9b0"
+        },
+        {
+          "path": "app/checkout/page.tsx",
+          "changeKind": "added",
+          "beforeSha256": null,
+          "afterSha256": "sha256:eedaaf07e8bd490d85b2123e9a5f346c2bf961a7df78b621bc41e33b4001312c"
+        },
+        {
+          "path": "app/api/onsale/return/route.ts",
+          "changeKind": "verified_unchanged",
+          "beforeSha256": "sha256:7c97cd232cfcfa308f6083f2ea9ca3b10e282671a0a22558c7e550d94404c081",
+          "afterSha256": "sha256:7c97cd232cfcfa308f6083f2ea9ca3b10e282671a0a22558c7e550d94404c081"
+        },
+        {
+          "path": "app/api/onsale/session/route.ts",
+          "changeKind": "verified_unchanged",
+          "beforeSha256": "sha256:62ec24d367c012cdfb7360a096b8298c54e1030b7eb34d3c66804df1e39851cd",
+          "afterSha256": "sha256:62ec24d367c012cdfb7360a096b8298c54e1030b7eb34d3c66804df1e39851cd"
+        }
+      ],
+      "proofIds": [
+        "eval-v01-recovery:named_next_runtime",
+        "eval-v01-recovery:session_current_order_continuity",
+        "eval-v01-recovery:return_checkout",
+        "browser-receipt:event-mobile",
+        "browser-receipt:event-desktop"
+      ],
+      "claimBoundary": "This is deterministic local runtime and browser-origin proof. It does not prove a live provider return, hosted database continuity, deployment, or human comprehension."
+    }
+  ],
+  "approvedExperienceDeltas": [
+    {
+      "changeSetId": "v01-app-hero-and-exact-run",
+      "path": "src/App.tsx",
+      "contract": "Keep the accepted buyer composition while using the packaged event hero and linking a terminal result to its exact retained run when one exists.",
+      "beforeSha256": "sha256:3c624e54db44751b00089469687d8d7e8706d66af5fbff51b1a073cd07c98c70",
+      "afterSha256": "sha256:a68e887cae47b32eea67ced7d9d088d5d62e5fe6f617f9910c7ba058916b04c4",
+      "reason": "Remove the remote hero dependency, preserve the event hierarchy, announce the completed current run, and route the result action to /flows?run=<opaque-ref> without falling back to another run.",
+      "approvalReference": "user:v01-complete-holistic-and-tested:2026-08-09",
+      "proofIds": [
+        "browser-receipt:event-mobile",
+        "browser-receipt:event-desktop",
+        "eval-v01-recovery:recorded_runs_same_session_exact_run"
+      ],
+      "proof": {
+        "status": "passed",
+        "population": "current_candidate_browser",
+        "artifact": "../../../outputs/ONSALE_v01_RECOVERY_BROWSER_RECEIPT.json",
+        "artifactSha256": "sha256:81ac12ab75710d9c186d1c4496a2ebb21317174e4bfe8c2cfba073d5113c862e",
+        "claimBoundary": "The browser receipt proves the current event render and exact local origin. The intercepted Next browser gate owns exact-run no-fallback behavior."
+      }
+    },
+    {
+      "changeSetId": "v01-mechanism-rail-evidence-motion",
+      "path": "src/MechanismRail.tsx",
+      "contract": "Preserve the compact six-actor topology and singular amber token while projecting preparation, Pay, retrieve, and ticket handoffs from retained authority changes.",
+      "beforeSha256": "sha256:14f5aa28f442aa9bf21075b3756a17a77f3937c18bfaf1c5637cd99ccc18eb7a",
+      "afterSha256": "sha256:481795fcf35898248980290d0bcd761c2242038bce4db0d325bc922fed8fecc0",
+      "reason": "Restore the authored one-token sequence for checkout preparation, buyer Pay activation, same-payment retrieve, and exact one-charge ticket fulfillment without changing the approved trace geometry.",
+      "approvalReference": "user:v01-complete-holistic-and-tested:2026-08-09",
+      "proofIds": [
+        "browser-receipt:event-desktop",
+        "eval-v01-recovery:one_token_motion",
+        "eval-v01-recovery:static_history"
+      ],
+      "proof": {
+        "status": "passed",
+        "population": "current_candidate_browser",
+        "artifact": "../../../outputs/ONSALE_v01_RECOVERY_BROWSER_RECEIPT.json",
+        "artifactSha256": "sha256:81ac12ab75710d9c186d1c4496a2ebb21317174e4bfe8c2cfba073d5113c862e",
+        "claimBoundary": "The browser receipt proves the current rail renders without overflow or runtime errors. Component gates prove the one-token state contract. Motion-media capture remains blocked."
+      }
+    },
+    {
+      "changeSetId": "v01-flows-recorded-runs",
+      "path": "app/flows/FlowsGallery.tsx",
+      "contract": "Recorded Runs uses only the sanitized same-session read model; exact-run requests resolve to that run or a target-specific error with no fallback.",
+      "beforeSha256": "sha256:270ef509fb6907c45a1db36e651271bd5963e976846846e524ec68f9a8bc0913",
+      "afterSha256": "sha256:1512b2238823ca58436099ea8a907dc5edd4ea19cd610a3529750453788fcaf5",
+      "reason": "Replace compile-time Previous Runs with the read-only ledger, current-run completion signal, cursor-safe merge, and exact opaque run selection while keeping Story Lab separate.",
+      "approvalReference": "user:v01-complete-holistic-and-tested:2026-08-09",
+      "proofIds": [
+        "browser-receipt:flows-recorded",
+        "eval-v01-recovery:recorded_runs_same_session_exact_run",
+        "eval-v01-recovery:static_history"
+      ],
+      "proof": {
+        "status": "passed",
+        "population": "current_candidate_browser",
+        "artifact": "../../../outputs/ONSALE_v01_RECOVERY_BROWSER_RECEIPT.json",
+        "artifactSha256": "sha256:81ac12ab75710d9c186d1c4496a2ebb21317174e4bfe8c2cfba073d5113c862e",
+        "claimBoundary": "The current browser receipt proves the Recorded Runs surface. Hosted Neon history remains blocked and no fixture may substitute for an unavailable ledger."
+      }
+    },
+    {
+      "changeSetId": "v01-story-lab-six-subject-contract",
+      "path": "app/flows/replay.ts",
+      "contract": "Expose exactly the six accepted Story Lab IDs and keep all replay state deterministic and simulation-only.",
+      "beforeSha256": "sha256:78063a6650edef99f9fa69918ea99d5af0910d6ab8c110d36708ef3aac2d7909",
+      "afterSha256": "sha256:8ade0ba7e82cca534cd18622278cbd5816a8f0cdab2c1d53e9f7ef89f420e7ae",
+      "reason": "Restore the approved six-subject taxonomy and make replay transitions accept the selected retained or simulated flow without laundering simulation into Recorded Runs.",
+      "approvalReference": "user:v01-complete-holistic-and-tested:2026-08-09",
+      "proofIds": [
+        "browser-receipt:flows-story-lab",
+        "eval-v01-recovery:story_lab_six_accepted_ids",
+        "eval-v01-recovery:static_history"
+      ],
+      "proof": {
+        "status": "passed",
+        "population": "current_candidate_browser",
+        "artifact": "../../../outputs/ONSALE_v01_RECOVERY_BROWSER_RECEIPT.json",
+        "artifactSha256": "sha256:81ac12ab75710d9c186d1c4496a2ebb21317174e4bfe8c2cfba073d5113c862e",
+        "claimBoundary": "This proves a local deterministic Story Lab surface. It is not provider, merchant, or performance evidence."
+      }
+    },
+    {
+      "changeSetId": "v01-flows-ledger-actions",
+      "path": "app/flows/flows.module.css",
+      "contract": "Keep the accepted sharp cobalt workbench while making refresh and pagination actions legible and stateful.",
+      "beforeSha256": "sha256:ccc7087e6a4f6ea3a99d1f96e218c67291e6f96c9a8928ade0040d650104cc22",
+      "afterSha256": "sha256:e6af5565b26ae8f9a6450fa2d39f97e6f7bb415597d605658996e8836f4e9386",
+      "reason": "Add visible hover and disabled states for the Recorded Runs refresh and load-more actions without changing the page composition or introducing a new styling system.",
+      "approvalReference": "user:v01-complete-holistic-and-tested:2026-08-09",
+      "proofIds": [
+        "browser-receipt:flows-recorded",
+        "browser-receipt:flows-story-lab",
+        "browser-receipt:flows-story-lab-tablet",
+        "browser-receipt:flows-story-lab-mobile"
+      ],
+      "proof": {
+        "status": "passed",
+        "population": "current_candidate_browser",
+        "artifact": "../../../outputs/ONSALE_v01_RECOVERY_BROWSER_RECEIPT.json",
+        "artifactSha256": "sha256:81ac12ab75710d9c186d1c4496a2ebb21317174e4bfe8c2cfba073d5113c862e",
+        "claimBoundary": "The receipt proves current desktop containment and zero browser errors. Named-human comprehension and accessibility remain blocked."
+      }
+    }
+  ]
+}

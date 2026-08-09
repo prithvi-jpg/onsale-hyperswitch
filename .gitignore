@@ -1,0 +1,15 @@
+node_modules/
+.next/
+dist/
+build/
+.cache/
+.env*
+.vite/
+vite.config.*.timestamp-*
+*.tsbuildinfo
+*-debug.log*
+logs/
+artifacts/
+*.log
+.claude-replay.*
+.tmp-*
