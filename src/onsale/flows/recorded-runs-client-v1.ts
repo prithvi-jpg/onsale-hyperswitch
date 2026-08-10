@@ -70,6 +70,11 @@ export interface SelectedRecordedRunV1 {
   readonly trace: RecordedRunTraceV1
 }
 
+export interface ExactRecordedRunLedgerV1 extends SelectedRecordedRunV1 {
+  readonly items: readonly RecordedRunSummaryV1[]
+  readonly nextCursor: RecordedRunRefV1 | null
+}
+
 interface ErrorEnvelopeV1 {
   readonly schema: "onsale.recorded-runs-error.v1"
   readonly ok: false
@@ -273,6 +278,23 @@ export async function fetchExactRecordedRunV1({
   readonly fetchImpl?: RecordedRunsFetchV1
   readonly signal?: AbortSignal
 }): Promise<SelectedRecordedRunV1> {
+  const resolved = await fetchExactRecordedRunWithLedgerV1({
+    runRef,
+    fetchImpl,
+    signal,
+  })
+  return { summary: resolved.summary, trace: resolved.trace }
+}
+
+export async function fetchExactRecordedRunWithLedgerV1({
+  runRef,
+  fetchImpl = defaultFetch,
+  signal,
+}: {
+  readonly runRef: string
+  readonly fetchImpl?: RecordedRunsFetchV1
+  readonly signal?: AbortSignal
+}): Promise<ExactRecordedRunLedgerV1> {
   const safeRunRef = parseRecordedRunRefV1(runRef)
   const trace = await fetchRecordedRunV1({
     runRef: safeRunRef,
@@ -281,12 +303,25 @@ export async function fetchExactRecordedRunV1({
   })
   let cursor: RecordedRunRefV1 | null = null
   const visited = new Set<RecordedRunRefV1>()
+  const items: RecordedRunSummaryV1[] = []
+  const known = new Set<RecordedRunRefV1>()
   while (true) {
     const page = await fetchRecordedRunsPageV1({ cursor, fetchImpl, signal })
+    for (const item of page.items) {
+      if (!known.has(item.runRef)) {
+        known.add(item.runRef)
+        items.push(item)
+      }
+    }
     const summary = page.items.find((item) => item.runRef === safeRunRef)
     if (summary) {
       assertRecordedRunMatchesSummaryV1(summary, trace)
-      return { summary, trace }
+      return {
+        summary,
+        trace,
+        items,
+        nextCursor: page.page.nextCursor,
+      }
     }
     if (page.page.nextCursor === null) {
       throw new RecordedRunsClientErrorV1("not_found", 404)

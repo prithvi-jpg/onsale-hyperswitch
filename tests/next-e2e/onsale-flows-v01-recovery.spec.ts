@@ -221,7 +221,7 @@ test("Story Lab restores six business cases and keeps the method-versus-connecto
   await expect(page.locator(".payment-trace-token")).toHaveCount(0)
 })
 
-test("an exact later-page run target resolves without rendering the newest different run", async ({
+test("an exact later-page run target selects that run without hiding the durable ledger", async ({
   page,
 }) => {
   const older = retainedRun(RUN_OLDER, "1")
@@ -254,7 +254,7 @@ test("an exact later-page run target resolves without rendering the newest diffe
 
   releaseDetail?.()
   await expect(page.getByTestId("flows-ledger")).toContainText(RUN_COMPLETED)
-  await expect(page.getByTestId("flows-ledger")).not.toContainText(RUN_OLDER)
+  await expect(page.getByTestId("flows-ledger")).toContainText(RUN_OLDER)
   await expect(page.getByRole("heading", {
     name: `Run ${RUN_COMPLETED.slice(-6).toUpperCase()}`,
   })).toBeVisible()

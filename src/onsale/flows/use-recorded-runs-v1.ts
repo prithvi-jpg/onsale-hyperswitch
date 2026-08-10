@@ -10,6 +10,7 @@ import {
   RecordedRunsClientErrorV1,
   assertRecordedRunMatchesSummaryV1,
   fetchExactRecordedRunV1,
+  fetchExactRecordedRunWithLedgerV1,
   fetchRecordedRunV1,
   fetchRecordedRunsPageV1,
   isRecordedRunsAbortErrorV1,
@@ -364,7 +365,7 @@ export function useRecordedRunsV1({
       const ticket = completedGate.current.begin()
       setState(exactRunResolvingStateV1(runRef))
       try {
-        const exactRun = await fetchExactRecordedRunV1({
+        const exactRun = await fetchExactRecordedRunWithLedgerV1({
           runRef,
           fetchImpl,
           signal: ticket.signal,
@@ -372,9 +373,9 @@ export function useRecordedRunsV1({
         if (!ticket.isCurrent()) return false
         setState({
           status: "ready",
-          items: [exactRun.summary],
-          nextCursor: null,
-          selected: exactRun,
+          items: exactRun.items,
+          nextCursor: exactRun.nextCursor,
+          selected: { summary: exactRun.summary, trace: exactRun.trace },
           pendingRunRef: null,
           loadingMore: false,
           message: null,

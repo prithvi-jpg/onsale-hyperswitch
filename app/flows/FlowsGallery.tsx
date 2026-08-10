@@ -381,9 +381,7 @@ export default function FlowsGallery({
   const selectedRun = selectedProjection?.run ?? null
   const visibleRecordedRuns = requestedRunInvalid
     ? []
-    : requestedRunRef === null
-      ? recordedRuns.state.items
-      : recordedRuns.state.items.filter((item) => item.runRef === requestedRunRef)
+    : recordedRuns.state.items
   const recordedRunMessage = requestedRunInvalid
     ? "The run reference is invalid. No other run has been substituted."
     : recordedRuns.state.message
