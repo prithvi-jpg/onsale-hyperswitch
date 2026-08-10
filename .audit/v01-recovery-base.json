@@ -315,6 +315,44 @@
         "artifactSha256": "sha256:4bd407c5ce0fb0100b0cf4170428ef819af9b14e8cc158523fc840b28c7f7eb1",
         "claimBoundary": "This proves ONSALE no longer clips a fullscreen iframe. The provider-owned inner card and approval controls remain cross-origin and are not restyled or simulated."
       }
+    },
+    {
+      "changeSetId": "v01-ticket-wallet-generic-flows-link",
+      "path": "src/App.tsx",
+      "contract": "Open the complete Flows ledger from a fulfilled ticket instead of coupling the buyer action to an exact-run query.",
+      "beforeSha256": "sha256:a68e887cae47b32eea67ced7d9d088d5d62e5fe6f617f9910c7ba058916b04c4",
+      "afterSha256": "sha256:56e58f42af2120cbf3d9ce71fabaffce080cc64aec6f5c70ac6f099f45685a09",
+      "reason": "The prototype should always show the full run list. The fulfilled buyer action now uses the same stable /flows destination as the header.",
+      "approvalReference": "user:final-polish-generic-flows-link:2026-08-09",
+      "proofIds": [
+        "eval-v01-recovery:ticket_wallet_generic_flows_link"
+      ],
+      "proof": {
+        "status": "passed",
+        "population": "focused_component_browser",
+        "artifact": "tests/e2e/onsale-checkout-c3.spec.ts",
+        "artifactSha256": "sha256:a1846c876df66694180a5d496f5dcf326618a53bc90d965148be627753daa245",
+        "claimBoundary": "This proves the buyer link destination and label. It does not change run capture, ledger reads, or payment completion."
+      }
+    },
+    {
+      "changeSetId": "v01-rail-generic-flows-link",
+      "path": "src/MechanismRail.tsx",
+      "contract": "Use one stable /flows action in the payment rail rather than changing its destination by checkout state or run availability.",
+      "beforeSha256": "sha256:481795fcf35898248980290d0bcd761c2242038bce4db0d325bc922fed8fecc0",
+      "afterSha256": "sha256:8acbf955b64865590c9a00b9122ea70a9644b521bc4f9612d63815fe789c6a8b",
+      "reason": "A generic ledger destination preserves the full Previous Runs list and removes a fragile presentation-only query coupling.",
+      "approvalReference": "user:final-polish-generic-flows-link:2026-08-09",
+      "proofIds": [
+        "eval-v01-recovery:rail_generic_flows_link"
+      ],
+      "proof": {
+        "status": "passed",
+        "population": "focused_component_contract",
+        "artifact": "tests/domain/mechanism-rail-c2.test.tsx",
+        "artifactSha256": "sha256:690d7f58bd028e0338918354f89d3908e19302177c0f7099ec370d6d861c173b",
+        "claimBoundary": "This proves the rail link is stable. Trace facts, topology, motion, and replay controls are unchanged."
+      }
     }
   ]
 }

@@ -575,7 +575,8 @@ describe("production mechanism-rail trace", () => {
     expect(html).not.toMatch(/failover/iu)
     expect(html).not.toContain("merchant_private_retry_cause")
     expect(html).not.toContain("REPLAY THIS OUTCOME")
-    expect(html).toContain("EXPLORE A STORY LIKE THIS")
+    expect(html).toContain("OPEN FLOWS")
+    expect(html).toContain('href="/flows"')
   })
 
   it("links a terminal receipt to its validated exact recorded run", () => {
@@ -587,8 +588,9 @@ describe("production mechanism-rail trace", () => {
       }),
     })
 
-    expect(html).toContain("OPEN THIS RECORDED PAYMENT")
-    expect(html).toContain("/flows?run=run_0123456789abcdef01234567")
+    expect(html).toContain("OPEN FLOWS")
+    expect(html).toContain('href="/flows"')
+    expect(html).not.toContain("/flows?run=")
     expect(html).not.toContain("?story=confirmed-payment")
   })
 })

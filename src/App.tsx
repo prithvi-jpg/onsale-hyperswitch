@@ -22,7 +22,6 @@ import {
   type CheckoutWidgetReadinessV1,
 } from "./use-onsale-checkout"
 import HyperswitchCheckoutClient from "./HyperswitchCheckoutClient"
-import type { RecordedRunRefV1 } from "./onsale/contracts/recorded-run-v1"
 import { useAnnounceCurrentRecordedRunV1 } from "./onsale/flows/use-announce-current-recorded-run-v1"
 
 // ─── Tokens ───────────────────────────────────────────────────────────────────
@@ -1975,12 +1974,10 @@ function ProductionTicketWallet({
   snapshot,
   event,
   onStartOver,
-  recordedRunRef,
 }: {
   snapshot: CheckoutPrivateSuccessV1
   event: OnsaleInventorySnapshotV1["event"] | null
   onStartOver: () => void
-  recordedRunRef: RecordedRunRefV1 | null
 }) {
   const eventName = event?.name ?? EVENT.name
   const venue = event?.venueName ?? EVENT.venue
@@ -2038,17 +2035,7 @@ function ProductionTicketWallet({
         >
           PRINT / SAVE SUMMARY
         </button>
-        <a
-          href={
-            recordedRunRef
-              ? `/flows?run=${encodeURIComponent(recordedRunRef)}`
-              : "/flows?story=confirmed-payment"
-          }
-        >
-          {recordedRunRef
-            ? "OPEN THIS RECORDED PAYMENT"
-            : "EXPLORE A CONFIRMED-PAYMENT STORY"}
-        </a>
+        <a href="/flows">OPEN FLOWS</a>
       </div>
     </div>
   )
@@ -2067,7 +2054,6 @@ function ProductionCheckoutScreen({
   onReconcile,
   onStartOver,
   navigationNotice,
-  recordedRunRef,
 }: {
   snapshot: CheckoutPrivateSuccessV1
   event: OnsaleInventorySnapshotV1["event"] | null
@@ -2087,7 +2073,6 @@ function ProductionCheckoutScreen({
   onReconcile: () => void
   onStartOver: () => void
   navigationNotice: string | null
-  recordedRunRef: RecordedRunRefV1 | null
 }) {
   const presentation = checkoutStagePresentation(snapshot)
   const headingRef = useRef<HTMLHeadingElement>(null)
@@ -2160,7 +2145,6 @@ function ProductionCheckoutScreen({
                 snapshot={snapshot}
                 event={event}
                 onStartOver={onStartOver}
-                recordedRunRef={recordedRunRef}
               />
             ) : snapshot.checkout ? (
               <HyperswitchCheckoutClient
@@ -2834,7 +2818,6 @@ function InventoryRuntimeApp({
           onReconcile={() => void checkout.reconcile("refresh")}
           onStartOver={startFreshDemo}
           navigationNotice={navigationNotice}
-          recordedRunRef={completedRunRef}
         />
       )}
     </Shell>

@@ -523,7 +523,7 @@ test("fulfilled checkout renders a four-item buyer ticket wallet without enginee
   })
   await expect(terminalHeading).toBeFocused()
   await expect(terminalHeading).toHaveCSS("outline-style", "none")
-  const flowsLink = page.getByRole("link", { name: "FLOWS" })
+  const flowsLink = page.getByRole("link", { name: "FLOWS", exact: true })
   await expect(flowsLink).toHaveCSS("background-color", "rgb(0, 109, 249)")
   await expect(flowsLink).toHaveCSS("color", "rgb(255, 255, 255)")
   expect((await flowsLink.boundingBox())?.height).toBeGreaterThanOrEqual(32)
@@ -580,10 +580,10 @@ test("fulfilled checkout renders a four-item buyer ticket wallet without enginee
     .toBe(1)
   await expect(
     page.getByRole("link", {
-      name: "OPEN THIS RECORDED PAYMENT",
+      name: "OPEN FLOWS",
       exact: true,
     }),
-  ).toHaveAttribute("href", `/flows?run=${completedRunRef}`)
+  ).toHaveAttribute("href", "/flows")
   await expect(
     page
       .locator(".onsale-breadcrumb-steps")

@@ -1142,13 +1142,9 @@ function ApprovedProductionMechanismRail({
 		/>
       <a
         className="production-rail-replay"
-        href={checkout.recordedRunRef
-          ? `/flows?run=${encodeURIComponent(checkout.recordedRunRef)}`
-          : `/flows?story=${checkout.stage === "fulfilled" ? "confirmed-payment" : checkout.stage === "action_required" ? "action-required" : checkout.stage === "declined" ? "terminal-decline" : "lost-response-recovery"}`}
+        href="/flows"
       >
-        {checkout.recordedRunRef
-          ? "OPEN THIS RECORDED PAYMENT →"
-          : "EXPLORE A STORY LIKE THIS →"}
+        OPEN FLOWS →
       </a>
     </div>
   )
