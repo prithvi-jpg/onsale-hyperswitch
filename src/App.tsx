@@ -2685,6 +2685,16 @@ function InventoryRuntimeApp({
   const visibleAppState: AppState = checkoutDismissedToEvent
     ? "event"
     : appState
+  const preventEntryWithSavedOrder = () => {
+    if (!checkoutSnapshot) return false
+    setAppState("event")
+    setEventNotice(
+      checkoutSnapshot.stage === "fulfilled"
+        ? "You already have a ticket. Open your tickets, then choose Buy Another Ticket to start fresh."
+        : "Your order is already saved. Resume it before starting another order.",
+    )
+    return true
+  }
   return (
     <Shell
       appState={visibleAppState}
@@ -2757,10 +2767,12 @@ function InventoryRuntimeApp({
               : undefined
           }
           onPresale={() => {
+            if (preventEntryWithSavedOrder()) return
             setEventNotice(null)
             setAppState("eligibility")
           }}
           onGeneral={() => {
+            if (preventEntryWithSavedOrder()) return
             if (!generalWindow?.canEnter) return
             setEventNotice(null)
             setAppState("hold")

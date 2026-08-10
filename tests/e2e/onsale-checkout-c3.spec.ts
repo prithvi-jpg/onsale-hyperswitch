@@ -601,6 +601,36 @@ test("fulfilled checkout renders a four-item buyer ticket wallet without enginee
   expect(terminal.providerRequests).toEqual([])
 })
 
+test("a saved ticket blocks sale re-entry until Buy Another Ticket resets it", async ({
+  page,
+}) => {
+  await installTerminalCheckout(page, fulfilledCheckout, 4)
+  await page.goto("/")
+  await page.getByRole("button", { name: "ONSALE home" }).click()
+
+  await expect(
+    page.getByRole("heading", { name: "PHANTOM CIRCUIT" }),
+  ).toBeVisible()
+  await expect(
+    page.getByRole("button", { name: "VIEW YOUR TICKETS →" }),
+  ).toBeVisible()
+
+  await page.getByRole("button", { name: "VIEW LIVE SEATS →" }).click()
+  await expect(
+    page.getByText(
+      "You already have a ticket. Open your tickets, then choose Buy Another Ticket to start fresh.",
+    ),
+  ).toBeVisible()
+  await expect(
+    page.getByRole("heading", { name: "PHANTOM CIRCUIT" }),
+  ).toBeVisible()
+
+  await page.getByRole("button", { name: "ENTER DEMO PRESALE →" }).click()
+  await expect(
+    page.getByRole("heading", { name: "PHANTOM CIRCUIT" }),
+  ).toBeVisible()
+})
+
 test("review-required checkout keeps the same payment recoverable without a stale grant or ticket", async ({
   page,
 }) => {

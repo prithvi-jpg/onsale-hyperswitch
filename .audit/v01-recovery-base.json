@@ -353,6 +353,25 @@
         "artifactSha256": "sha256:690d7f58bd028e0338918354f89d3908e19302177c0f7099ec370d6d861c173b",
         "claimBoundary": "This proves the rail link is stable. Trace facts, topology, motion, and replay controls are unchanged."
       }
+    },
+    {
+      "changeSetId": "v01-saved-order-entry-guard",
+      "path": "src/App.tsx",
+      "contract": "Keep a completed buyer on the event surface when sale-entry controls are pressed and direct them to the saved ticket and explicit reset action.",
+      "beforeSha256": "sha256:56e58f42af2120cbf3d9ce71fabaffce080cc64aec6f5c70ac6f099f45685a09",
+      "afterSha256": "sha256:4c2d4c4f43f158c8c70529eca585d1f598d094eeee7f2ef314e01ec3a6599503",
+      "reason": "The eligibility and seat screens intentionally do not render while a durable checkout snapshot exists. Guarding both entry callbacks prevents the resulting blank state and explains the existing Buy Another Ticket reset path.",
+      "approvalReference": "user:final-polish-saved-ticket-entry:2026-08-09",
+      "proofIds": [
+        "eval-v01-recovery:saved_ticket_entry_guard"
+      ],
+      "proof": {
+        "status": "passed",
+        "population": "focused_component_browser",
+        "artifact": "tests/e2e/onsale-checkout-c3.spec.ts",
+        "artifactSha256": "sha256:b74d9ff38236578a4ec9b9c9c582d74151b0fd395366a2ec8a8a0da8cb018587",
+        "claimBoundary": "This proves both sale-entry controls remain on the event surface for a fulfilled order. The existing reset request, session rotation, payment, and ticket issuance logic are unchanged."
+      }
     }
   ]
 }
