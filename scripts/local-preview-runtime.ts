@@ -149,6 +149,7 @@ export function buildLocalPreviewEnvironmentV1(
     ONSALE_CANONICAL_ORIGIN: canonicalOrigin.origin,
     ONSALE_COOKIE_SECURE:
       canonicalOrigin.protocol === "https:" ? "true" : "false",
+    ONSALE_RECORDED_RUN_SCOPE: "local_review",
   }
 }
 

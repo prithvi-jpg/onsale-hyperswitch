@@ -30,6 +30,7 @@ describe("v0.1 exact local runtime environment", () => {
         ONSALE_ALLOWED_ORIGINS: origin,
         ONSALE_CANONICAL_ORIGIN: origin,
         ONSALE_COOKIE_SECURE: secure,
+        ONSALE_RECORDED_RUN_SCOPE: "local_review",
       })
     },
   )

@@ -47,6 +47,7 @@ const RUN_NAMESPACE = "onsale-recorded-run-v1:"
 const EVENT_NAMESPACE = "onsale-recorded-event-v1:"
 const EVIDENCE_NAMESPACE = "onsale-recorded-evidence-v1:"
 const PAGE_LIMIT = 20
+const ONSALE_RECORDED_RUN_SCOPE_ENV_V1 = "ONSALE_RECORDED_RUN_SCOPE"
 
 type QueryClient = Pick<PoolClient, "query">
 
@@ -365,8 +366,8 @@ export function projectRecordedRunRowsV1(input: {
 }
 
 export interface RecordedRunsRepositoryV1 {
-  list(buyerRef: string, cursor?: RecordedRunRefV1 | null): Promise<RecordedRunsPageV1>
-  get(buyerRef: string, runRef: RecordedRunRefV1): Promise<LoadedRunV1 | undefined>
+  list(buyerRef: string | null, cursor?: RecordedRunRefV1 | null): Promise<RecordedRunsPageV1>
+  get(buyerRef: string | null, runRef: RecordedRunRefV1): Promise<LoadedRunV1 | undefined>
   current(buyerRef: string, orderId: string): Promise<LoadedRunV1 | undefined>
   close(): Promise<void>
 }
@@ -402,7 +403,8 @@ export class NeonRecordedRunsRepositoryV1 implements RecordedRunsRepositoryV1 {
     } finally { client.release() }
   }
 
-  async #load(client: QueryClient, buyerRef: string, paymentId: string): Promise<LoadedRunV1 | undefined> {
+  async #load(client: QueryClient, buyerRef: string | null, paymentId: string): Promise<LoadedRunV1 | undefined> {
+    const buyerPredicate = buyerRef === null ? "" : "and o.buyer_ref = $2"
     const headerResult = await client.query<HeaderRow>(
       `select pp.id as payment_id, o.state as order_state,
               (select count(*) from ${this.#table("order_item")} oi where oi.order_id = o.id) as item_count,
@@ -429,8 +431,8 @@ export class NeonRecordedRunsRepositoryV1 implements RecordedRunsRepositoryV1 {
          where po.payment_id = pp.id
          order by po.received_at desc, po.id desc limit 1
        ) latest on true
-       where pp.id = $1 and o.buyer_ref = $2`,
-      [paymentId, buyerRef],
+       where pp.id = $1 ${buyerPredicate}`,
+      buyerRef === null ? [paymentId] : [paymentId, buyerRef],
     )
     const header = headerResult.rows[0]
     if (!header) return undefined
@@ -463,13 +465,14 @@ export class NeonRecordedRunsRepositoryV1 implements RecordedRunsRepositoryV1 {
     })
   }
 
-  async get(buyerRef: string, runRef: RecordedRunRefV1): Promise<LoadedRunV1 | undefined> {
+  async get(buyerRef: string | null, runRef: RecordedRunRefV1): Promise<LoadedRunV1 | undefined> {
     return this.#read(async (client) => {
+      const buyerPredicate = buyerRef === null ? "" : "where o.buyer_ref = $1"
       const candidates = await client.query<{ payment_id: string }>(
         `select pp.id as payment_id from ${this.#table("provider_payment")} pp
          join ${this.#table("orders")} o on o.id = pp.order_id
-         where o.buyer_ref = $1`,
-        [buyerRef],
+         ${buyerPredicate}`,
+        buyerRef === null ? [] : [buyerRef],
       )
       const paymentId = candidates.rows.find(
         (row) => recordedRunRefFromPaymentIdV1(row.payment_id) === runRef,
@@ -492,8 +495,9 @@ export class NeonRecordedRunsRepositoryV1 implements RecordedRunsRepositoryV1 {
     })
   }
 
-  async list(buyerRef: string, cursor: RecordedRunRefV1 | null = null): Promise<RecordedRunsPageV1> {
+  async list(buyerRef: string | null, cursor: RecordedRunRefV1 | null = null): Promise<RecordedRunsPageV1> {
     return this.#read(async (client) => {
+      const buyerPredicate = buyerRef === null ? "" : "where o.buyer_ref = $1"
       const selectors = await client.query<SelectorRow>(
         `select pp.id as payment_id,
                 greatest(
@@ -505,9 +509,9 @@ export class NeonRecordedRunsRepositoryV1 implements RecordedRunsRepositoryV1 {
          from ${this.#table("provider_payment")} pp
          join ${this.#table("orders")} o on o.id = pp.order_id
          left join ${this.#table("fulfillment_bundle")} fb on fb.payment_id = pp.id
-         where o.buyer_ref = $1
+         ${buyerPredicate}
          order by recorded_at desc, pp.id desc`,
-        [buyerRef],
+        buyerRef === null ? [] : [buyerRef],
       )
       const cursorIndex = cursor === null
         ? -1
@@ -547,7 +551,11 @@ function cookieValue(request: Request, name: string): string | undefined {
   return values.length === 1 ? values[0] : undefined
 }
 
-function requestAuthority(request: Request): { readonly buyerRef: string; readonly localOrigin: string } {
+function requestAuthority(request: Request): {
+  readonly ledgerBuyerRef: string | null
+  readonly sessionBuyerRef: string | null
+  readonly localOrigin: string
+} {
   const source = process.env[ONSALE_ALLOWED_ORIGINS_ENV_V1]
   const configured = parseConfiguredOriginsV1(source === undefined ? [ONSALE_LOCAL_PREVIEW_ORIGIN_V1] : source.split(","))
   if (configured.size !== 1) throw new OnsaleHttpGuardError("request_origin_denied")
@@ -560,8 +568,19 @@ function requestAuthority(request: Request): { readonly buyerRef: string; readon
   const fetchSite = request.headers.get("sec-fetch-site")
   if (fetchSite !== null && fetchSite !== "same-origin" && fetchSite !== "none") throw new OnsaleHttpGuardError("request_origin_denied")
   const session = resolveExistingAnonymousSessionV1(cookieValue(request, ONSALE_SESSION_COOKIE_NAME_V1))
-  if (!session) throw new OnsaleHttpGuardError("request_origin_denied")
-  return { buyerRef: session.session.buyerRef(), localOrigin }
+  const sessionBuyerRef = session?.session.buyerRef() ?? null
+  const scope = process.env[ONSALE_RECORDED_RUN_SCOPE_ENV_V1]?.trim()
+  if (scope !== undefined && scope !== "" && scope !== "local_review") {
+    throw new OnsaleHttpGuardError("request_origin_denied")
+  }
+  if (scope !== "local_review" && sessionBuyerRef === null) {
+    throw new OnsaleHttpGuardError("request_origin_denied")
+  }
+  return {
+    ledgerBuyerRef: scope === "local_review" ? null : sessionBuyerRef,
+    sessionBuyerRef,
+    localOrigin,
+  }
 }
 
 function response(body: unknown, status = 200): Response {
@@ -601,7 +620,7 @@ export async function handleRecordedRunsListGetV1(
   repository?: RecordedRunsRepositoryV1,
 ): Promise<Response> {
   try {
-    const { buyerRef } = requestAuthority(request)
+    const { ledgerBuyerRef } = requestAuthority(request)
     const url = new URL(request.url)
     const limits = url.searchParams.getAll("limit")
     const cursors = url.searchParams.getAll("cursor")
@@ -613,7 +632,7 @@ export async function handleRecordedRunsListGetV1(
     ) throw new TypeError("Invalid query")
     const cursorValue = cursors[0] ?? null
     const cursor = cursorValue === null ? null : parseRecordedRunRefV1(cursorValue, "$.cursor")
-    return response(await (repository ?? repositoryFromEnvironment()).list(buyerRef, cursor))
+    return response(await (repository ?? repositoryFromEnvironment()).list(ledgerBuyerRef, cursor))
   } catch (error) { return errorResponse(error) }
 }
 
@@ -623,10 +642,10 @@ export async function handleRecordedRunDetailGetV1(
   repository?: RecordedRunsRepositoryV1,
 ): Promise<Response> {
   try {
-    const { buyerRef } = requestAuthority(request)
+    const { ledgerBuyerRef } = requestAuthority(request)
     if (new URL(request.url).search !== "") throw new TypeError("Invalid query")
     const runRef = parseRecordedRunRefV1(runRefCandidate)
-    const run = await (repository ?? repositoryFromEnvironment()).get(buyerRef, runRef)
+    const run = await (repository ?? repositoryFromEnvironment()).get(ledgerBuyerRef, runRef)
     return run ? response(run.trace) : errorResponse(new RecordedRunsRepositoryErrorV1("RUN_NOT_FOUND", "Run not found"))
   } catch (error) { return errorResponse(error) }
 }
@@ -636,7 +655,7 @@ export async function handleCurrentRecordedRunGetV1(
   repository?: RecordedRunsRepositoryV1,
 ): Promise<Response> {
   try {
-    const { buyerRef } = requestAuthority(request)
+    const { sessionBuyerRef } = requestAuthority(request)
     if (new URL(request.url).search !== "") throw new TypeError("Invalid query")
     const orderCandidate = cookieValue(request, ONSALE_CURRENT_ORDER_COOKIE_NAME_V1)
     const emptyCurrent: CurrentRecordedRunV1 = {
@@ -645,9 +664,10 @@ export async function handleCurrentRecordedRunGetV1(
       integrityRevision: null,
       terminal: false,
     }
+    if (sessionBuyerRef === null) return response(emptyCurrent)
     if (!orderCandidate) return response(emptyCurrent)
     const orderRef = createOnsaleOrderPointerV1(orderCandidate).orderRef()
-    const run = await (repository ?? repositoryFromEnvironment()).current(buyerRef, orderRef)
+    const run = await (repository ?? repositoryFromEnvironment()).current(sessionBuyerRef, orderRef)
     if (!run) return response(emptyCurrent)
     const terminal = ["fulfilled", "canceled", "integrity_review"].includes(run.trace.order.state) || ["succeeded", "exhausted", "integrity_review"].includes(run.trace.payment.state)
     const current: CurrentRecordedRunV1 = {

@@ -1499,6 +1499,40 @@
   display: grid;
 }
 
+.ops-run-skeletons > span {
+  display: block;
+  padding: 12px 15px;
+  border-bottom: 1px solid var(--onsale-line);
+  color: #56657a;
+  font-family: var(--onsale-mono);
+  font-size: 10px;
+}
+
+.ops-run-skeletons > div {
+  display: grid;
+  min-height: 108px;
+  align-content: center;
+  gap: 10px;
+  padding: 15px;
+  border-bottom: 1px solid var(--onsale-line);
+  background: #fff;
+}
+
+.ops-run-skeletons i {
+  display: block;
+  height: 9px;
+  width: 72%;
+  background: #e8eef7;
+}
+
+.ops-run-skeletons i:first-child {
+  width: 34%;
+}
+
+.ops-run-skeletons i:last-child {
+  width: 52%;
+}
+
 .ops-ledger-action {
   min-height: 44px;
   width: calc(100% - 30px);

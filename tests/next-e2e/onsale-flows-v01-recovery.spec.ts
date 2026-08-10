@@ -191,6 +191,38 @@ test("Recorded Runs stays static on selection, replays explicitly, and merges th
   expect(api.requests.every((request) => request.method === "GET")).toBe(true)
 })
 
+test("Recorded Runs uses a quiet skeleton while the durable read is pending", async ({
+  page,
+}) => {
+  const older = retainedRun(RUN_OLDER, "1")
+  let releaseList: (() => void) | undefined
+  const listGate = new Promise<void>((resolve) => { releaseList = resolve })
+  await page.route("**/api/onsale/ops/current-run", async (route) => {
+    await fulfillJson(route, {
+      schema: "onsale.current-recorded-run.v1",
+      runRef: null,
+      integrityRevision: null,
+      terminal: false,
+    })
+  })
+  await page.route(/\/api\/onsale\/ops\/runs\?limit=20/u, async (route) => {
+    await listGate
+    await fulfillJson(route, pageFor([older]))
+  })
+  await page.route(`**/api/onsale/ops/runs/${RUN_OLDER}`, async (route) => {
+    await fulfillJson(route, older)
+  })
+
+  await page.goto("/flows")
+  await expect(page.getByTestId("flows-run-skeleton")).toHaveCount(3)
+  await expect(page.getByTestId("flows-ledger")).toContainText("Loading runs")
+  await expect(page.getByTestId("flows-ledger")).not.toContainText(
+    "Loading durable runs",
+  )
+  releaseList?.()
+  await expect(page.getByTestId("flows-ledger")).toContainText(RUN_OLDER)
+})
+
 test("Story Lab restores six business cases and keeps the method-versus-connector lab explicit", async ({
   page,
 }) => {

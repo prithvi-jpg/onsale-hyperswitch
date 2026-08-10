@@ -770,11 +770,29 @@ export default function FlowsGallery({
                 {recordedRunMessage}
               </p>
             )}
-            {view === "runs" && recordedRuns.state.status === "loading" && (
+            {view === "runs" &&
+              requestedRunRef === null &&
+              recordedRuns.state.status === "loading" && (
+              <div className={styles["ops-run-skeletons"]} role="status">
+                <span>Loading runs</span>
+                {[0, 1, 2].map((index) => (
+                  <div
+                    aria-hidden="true"
+                    data-testid="flows-run-skeleton"
+                    key={index}
+                  >
+                    <i />
+                    <i />
+                    <i />
+                  </div>
+                ))}
+              </div>
+            )}
+            {view === "runs" &&
+              requestedRunRef !== null &&
+              recordedRuns.state.status === "loading" && (
               <p className={styles["ops-attempt-empty"]} role="status">
-                {requestedRunRef === null
-                  ? "LOADING DURABLE RUNS"
-                  : `RESOLVING ${requestedRunRef}`}
+                {`RESOLVING ${requestedRunRef}`}
               </p>
             )}
             {view === "runs" &&

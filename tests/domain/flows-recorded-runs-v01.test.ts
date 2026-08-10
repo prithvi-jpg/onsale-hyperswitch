@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest"
+import { afterEach, describe, expect, it, vi } from "vitest"
 import { createHash } from "node:crypto"
 
 import {
@@ -95,6 +95,8 @@ function pageFor(
 }
 
 describe("ONSALE v0.1 durable Recorded Runs boundary", () => {
+  afterEach(() => vi.unstubAllEnvs())
+
   it("keeps unproven received money unknown while retaining exact succeeded money", () => {
     const pending = retainedTrace("1")
     expect(pending.money.amountReceivedMinor).toBeNull()
@@ -458,6 +460,65 @@ describe("ONSALE v0.1 durable Recorded Runs boundary", () => {
     expect(throughPortless.status).toBe(200)
     expect(attacker.status).toBe(403)
     expect((await attacker.json()).error.code).toBe("REQUEST_ORIGIN_DENIED")
+  })
+
+  it("lists the local review ledger without borrowing a buyer session", async () => {
+    vi.stubEnv("ONSALE_ALLOWED_ORIGINS", "http://onsale-v01.localhost:4310")
+    vi.stubEnv("ONSALE_RECORDED_RUN_SCOPE", "local_review")
+    let listScope: string | null | undefined
+    let detailScope: string | null | undefined
+    let currentCalled = false
+    const trace = retainedTrace("1")
+    const repository: RecordedRunsRepositoryV1 = {
+      list: async (buyerRef) => {
+        listScope = buyerRef
+        return pageFor(trace, "2026-08-09T12:01:00.000Z", null)
+      },
+      get: async (buyerRef) => {
+        detailScope = buyerRef
+        return { trace, recordedAt: "2026-08-09T12:01:00.000Z" }
+      },
+      current: async () => {
+        currentCalled = true
+        return undefined
+      },
+      close: async () => undefined,
+    }
+    const headers = {
+      origin: "http://onsale-v01.localhost:4310",
+      "sec-fetch-site": "same-origin",
+    }
+
+    const list = await handleRecordedRunsListGetV1(
+      new Request("http://127.0.0.1:4968/api/onsale/ops/runs", { headers }),
+      repository,
+    )
+    const detail = await handleRecordedRunDetailGetV1(
+      new Request(`http://127.0.0.1:4968/api/onsale/ops/runs/${RUN_ONE}`, {
+        headers,
+      }),
+      RUN_ONE,
+      repository,
+    )
+    const current = await handleCurrentRecordedRunGetV1(
+      new Request("http://127.0.0.1:4968/api/onsale/ops/current-run", {
+        headers,
+      }),
+      repository,
+    )
+
+    expect(list.status).toBe(200)
+    expect(detail.status).toBe(200)
+    expect(current.status).toBe(200)
+    expect(listScope).toBeNull()
+    expect(detailScope).toBeNull()
+    expect(currentCalled).toBe(false)
+    expect(await current.json()).toEqual({
+      schema: "onsale.current-recorded-run.v1",
+      runRef: null,
+      integrityRevision: null,
+      terminal: false,
+    })
   })
 
   it("rejects duplicate list parameters before repository access", async () => {
