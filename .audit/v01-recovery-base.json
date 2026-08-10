@@ -440,6 +440,23 @@
         "artifactSha256": "sha256:bc5e6018dcf196c85068978b3b5a2a237949c5acc06d015e91b75dff005bc1b7",
         "claimBoundary": "The test proves full dynamic viewport height, widened desktop viewport, no document-height growth, and zero root overflow. The nested provider page remains official cross-origin content and was not rewritten."
       }
+    },
+    {
+      "changeSetId": "v01-app-shell-viewport-containment",
+      "path": "src/index.css",
+      "contract": "Keep the ONSALE application shell pinned to the visible viewport so provider mount residue cannot expose the root document below it.",
+      "beforeSha256": "sha256:6b57d767974a6464f453e5913cabc3090cba22f0baa6e965e4cbe5c36709458c",
+      "afterSha256": "sha256:4a5978a9eda41c15565940e5e31101d3c80cbda0587aca6c2aee6fc554b04099",
+      "reason": "The shell was a normal-flow 100vh element. If an injected provider mount extended the outer document, scrolling could move the whole shell upward and reveal a large white root area. Only ONSALE app pages are now fixed to the dynamic viewport; the Flows document keeps normal scrolling.",
+      "approvalReference": "user:remove-trailing-white-shell-gap:2026-08-10",
+      "proofIds": ["eval-v01-recovery:app_shell_viewport_containment"],
+      "proof": {
+        "status": "passed",
+        "population": "focused_component_browser",
+        "artifact": "tests/e2e/onsale-checkout-c3.spec.ts",
+        "artifactSha256": "sha256:2cb766199f47d2e56e177c930dc022bc67d235a2b88a8eaeb3650c9492a65a41",
+        "claimBoundary": "The exact 1538 by 746 regression proves the shell is fixed at y=0, fills the viewport, and the provider overlay remains document-flow isolated. Payment, session, ticket, and Flows behavior are unchanged."
+      }
     }
   ]
 }

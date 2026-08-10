@@ -10,6 +10,24 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+@media screen {
+  html:has(.onsale-shell),
+  body:has(.onsale-shell),
+  #root:has(> .onsale-shell) {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .onsale-shell {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100dvh !important;
+    min-height: 100dvh;
+  }
+}
+
 /* ── Mechanism Rail / Flow animations ───────────────────────────── */
 @keyframes draw-path {
   from { stroke-dashoffset: 1000; }

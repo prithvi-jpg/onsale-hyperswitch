@@ -482,14 +482,19 @@ test("ONSALE home returns to the event without discarding the current checkout",
 test("official provider overlay is viewport-sized and cannot stretch the document", async ({
   page,
 }) => {
+  await page.setViewportSize({ width: 1538, height: 746 })
   await installCheckoutReady(page)
   await page.goto("/")
 
+  const shell = page.locator(".onsale-shell")
   const checkoutScreen = page.locator(".production-checkout-screen")
   const provider = page.locator(".production-checkout-provider")
   await expect(provider).toBeVisible()
   await page.waitForTimeout(450)
 
+  await expect(shell).toHaveCSS("position", "fixed")
+  expect((await shell.boundingBox())?.y).toBe(0)
+  expect((await shell.boundingBox())?.height).toBe(746)
   await expect(checkoutScreen).toHaveCSS("transform", "none")
   await expect(provider).toHaveCSS("overflow-x", "visible")
   await expect(provider).toHaveCSS("overflow-y", "visible")
