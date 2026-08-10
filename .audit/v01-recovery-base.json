@@ -423,6 +423,23 @@
         "artifactSha256": "sha256:79b39f16dcb86bae6e463c32b80c520f8b1eda376756c40faa16f096cd81d7d5",
         "claimBoundary": "This covers the action grouping and reset request; final named-runtime visual inspection remains separate."
       }
+    },
+    {
+      "changeSetId": "v01-provider-overlay-responsive-viewport",
+      "path": "src/index.css",
+      "contract": "Keep the official Hyperswitch action iframe isolated from document flow and give its provider-owned content a responsive viewport large enough for desktop and tablet controls.",
+      "beforeSha256": "sha256:e9a7c0310b02417e49af5cf06817a8fbb6d594d324fe1673197d2ca431992cf4",
+      "afterSha256": "sha256:6b57d767974a6464f453e5913cabc3090cba22f0baa6e965e4cbe5c36709458c",
+      "reason": "Hyperswitch injects the official fullscreen iframe under a generated wrapper. The wrapper could retain flow dimensions, while the provider test page was squeezed into a narrow responsive breakpoint. A fixed zero-size mount prevents layout bleed; a centered dynamic viewport widens the official frame above 600px while mobile remains one viewport wide.",
+      "approvalReference": "user:provider-overlay-sizing-and-flow-isolation:2026-08-10",
+      "proofIds": ["eval-v01-recovery:provider_overlay_viewport_isolation"],
+      "proof": {
+        "status": "passed",
+        "population": "focused_component_browser",
+        "artifact": "tests/e2e/onsale-checkout-c3.spec.ts",
+        "artifactSha256": "sha256:bc5e6018dcf196c85068978b3b5a2a237949c5acc06d015e91b75dff005bc1b7",
+        "claimBoundary": "The test proves full dynamic viewport height, widened desktop viewport, no document-height growth, and zero root overflow. The nested provider page remains official cross-origin content and was not rewritten."
+      }
     }
   ]
 }

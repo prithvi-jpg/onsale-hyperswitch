@@ -479,7 +479,7 @@ test("ONSALE home returns to the event without discarding the current checkout",
   )
 })
 
-test("official provider overlay can escape the checkout card and cover the viewport", async ({
+test("official provider overlay is viewport-sized and cannot stretch the document", async ({
   page,
 }) => {
   await installCheckoutReady(page)
@@ -493,6 +493,47 @@ test("official provider overlay can escape the checkout card and cover the viewp
   await expect(checkoutScreen).toHaveCSS("transform", "none")
   await expect(provider).toHaveCSS("overflow-x", "visible")
   await expect(provider).toHaveCSS("overflow-y", "visible")
+
+  const documentHeight = await page.evaluate(
+    () => document.documentElement.scrollHeight,
+  )
+  await page.evaluate(() => {
+    const widget = document.querySelector(".official-checkout-widget")
+    if (!widget) throw new Error("Official checkout widget is missing")
+    const wrapper = document.createElement("div")
+    wrapper.id =
+      "orca-fullscreen-iframeRef-orca-elements-payment-element-onsale-unified-checkout"
+    wrapper.style.width = "420px"
+    wrapper.style.height = "1200px"
+    const frame = document.createElement("iframe")
+    frame.id = "orca-fullscreen"
+    frame.title = "Official provider action"
+    frame.style.cssText =
+      "position:absolute;width:420px;height:1200px;border:0"
+    wrapper.append(frame)
+    widget.append(wrapper)
+  })
+
+  const viewport = page.viewportSize()
+  if (!viewport) throw new Error("Viewport is unavailable")
+  const wrapper = page.locator(
+    '[id^="orca-fullscreen-iframeRef-"]',
+  )
+  const frame = page.locator("#orca-fullscreen")
+  await expect(wrapper).toHaveCSS("position", "fixed")
+  await expect(wrapper).toHaveCSS("height", "0px")
+  await expect(frame).toHaveCSS("position", "fixed")
+  expect((await frame.boundingBox())?.height).toBe(viewport.height)
+  expect((await frame.boundingBox())?.width).toBeGreaterThan(viewport.width)
+  await expect(page.locator("body")).toHaveCSS("overflow", "hidden")
+  expect(
+    await page.evaluate(() => document.documentElement.scrollHeight),
+  ).toBeLessThanOrEqual(documentHeight + 1)
+  expect(
+    await page.evaluate(
+      () => document.documentElement.scrollWidth - document.documentElement.clientWidth,
+    ),
+  ).toBe(0)
 })
 
 test("fulfilled checkout renders a four-item buyer ticket wallet without engineering payment facts", async ({
