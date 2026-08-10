@@ -1,0 +1,496 @@
+{
+  "recordType": "onsale.v01-recovery-base.v1",
+  "createdAt": "2026-08-09",
+  "source": "/tmp/onsale-main-prototype-native-v01-final4",
+  "sourceRevision": "340e33651743920d8f8932b65bd40e9782e11ffd",
+  "policy": "The copied v0.1 experience is binding. Later logic may enter only through a narrowly tested adapter or runtime boundary. No experience file may change without a named bug and before-after browser proof.",
+  "protectedFiles": {
+    "src/App.tsx": "sha256:3c624e54db44751b00089469687d8d7e8706d66af5fbff51b1a073cd07c98c70",
+    "src/MechanismRail.tsx": "sha256:14f5aa28f442aa9bf21075b3756a17a77f3937c18bfaf1c5637cd99ccc18eb7a",
+    "src/PaymentTraceMap.tsx": "sha256:a3db305e849fab0f029cb7a1e40c7512e42d802d5b82c0e5897b14f31258f6fe",
+    "src/payment-trace/trace-geometry.ts": "sha256:2c52bfdc77c74c10f1decd735daae3a7ca19c06abeb21cea20bd540f19acef14",
+    "src/index.css": "sha256:6141b286e1948be0c375f961b26c5e1b0a4aba818afeb87e52c252a4e4ec0786",
+    "app/flows/FlowsGallery.tsx": "sha256:270ef509fb6907c45a1db36e651271bd5963e976846846e524ec68f9a8bc0913",
+    "app/flows/flows.module.css": "sha256:ccc7087e6a4f6ea3a99d1f96e218c67291e6f96c9a8928ade0040d650104cc22",
+    "app/flows/replay.ts": "sha256:78063a6650edef99f9fa69918ea99d5af0910d6ab8c110d36708ef3aac2d7909"
+  },
+  "allowedPorts": [
+    "canonical Next runtime and exact-origin/session repair",
+    "same-payment provider return continuity",
+    "sanitized current-run and Recorded Runs read model",
+    "bounded timeout and retry behavior"
+  ],
+  "forbiddenPorts": [
+    "v0.2 rail geometry or large node composition",
+    "v0.2 buyer layout replacement",
+    "simulation presented as recorded evidence",
+    "a cloned or fabricated provider approval page"
+  ],
+  "approval": {
+    "reference": "user:v01-complete-holistic-and-tested:2026-08-09",
+    "recordedAt": "2026-08-09",
+    "scope": "The approved recovery repairs preserve the v0.1 composition while repairing the exact named runtime, same-session return, exact Recorded Run selection, six-subject Story Lab, and evidence-linked rail motion."
+  },
+  "approvedBoundaryDeltas": [
+    {
+      "changeSetId": "v01-runtime-session-return",
+      "reason": "Make the pinned Linux Node 22.23.2 Next runtime at http://onsale-v01.localhost:4310 the exact default, retain one anonymous session and current-order pointer through provider return, and resume on clean /checkout without trusting query state.",
+      "approvalReference": "user:v01-complete-holistic-and-tested:2026-08-09",
+      "paths": [
+        {
+          "path": "package.json",
+          "changeKind": "modified",
+          "beforeSha256": "sha256:604c6f3de480b7dfec1431a32da7b73a9f03f5bd52aa2db50c2485b52644f0b3",
+          "afterSha256": "sha256:2fd4d3e716a28a16a790fa44e713dfba67bb04eb7d202b20ffde61f163e820e4"
+        },
+        {
+          "path": "next.config.ts",
+          "changeKind": "modified",
+          "beforeSha256": "sha256:802d6a9dd3d6e7f31330f4c5f73588258e8ac93a7978d0476b51b319222dd764",
+          "afterSha256": "sha256:1c6b9f5290e04e25d0084e51dcb1de5c50a7d73709891e147d11c5f37adc471b"
+        },
+        {
+          "path": "scripts/native-node22.sh",
+          "changeKind": "modified",
+          "beforeSha256": "sha256:a784e644fa948ab0f623e38f5e0622281acee6af256da1f03200bbd2431f9f7a",
+          "afterSha256": "sha256:65d3986e58417efa2ed2379f4d2ee14093eb2a37d93d35ddaa29685cee948411"
+        },
+        {
+          "path": "scripts/portless-local-preview.ts",
+          "changeKind": "added",
+          "beforeSha256": null,
+          "afterSha256": "sha256:fb48ef61cb41b35c8d4e23013883614a08e166d16df4b6884d881d0a981d5217"
+        },
+        {
+          "path": "scripts/local-preview-runtime.ts",
+          "changeKind": "added",
+          "beforeSha256": null,
+          "afterSha256": "sha256:956c093297a643779700153a640437f307a2065d4d5b70bf75eefde30c019b20"
+        },
+        {
+          "path": "src/server/onsale-session.ts",
+          "changeKind": "modified",
+          "beforeSha256": "sha256:a29ec5080f4ab96a64ea1488e9f7cc832770256c94ac950f04b179021133ee4f",
+          "afterSha256": "sha256:b5fd1047823e6ac70bc8d6ef4bff3c45e26d6abe05f6008ef9558cec56e4d4f9"
+        },
+        {
+          "path": "src/server/onsale-checkout-runtime.ts",
+          "changeKind": "modified",
+          "beforeSha256": "sha256:576616dc97306d99b062b4435b29b3249f1acbfbc25d733ce049a4aac7b63217",
+          "afterSha256": "sha256:74d8ef51de59290bb93a711036b2edcee35379b85b2a9e219123bfbba43fafb7"
+        },
+        {
+          "path": "src/server/onsale-checkout-route-runtime.ts",
+          "changeKind": "modified",
+          "beforeSha256": "sha256:cc872bca461f7c79d050875004e69c8b6576fc514728b2e2ef36e611f0c50b30",
+          "afterSha256": "sha256:54d8f3840a5e4c3e4cc085ed4f85caab138316d018446f326ab8277f5bfac9b0"
+        },
+        {
+          "path": "app/checkout/page.tsx",
+          "changeKind": "added",
+          "beforeSha256": null,
+          "afterSha256": "sha256:eedaaf07e8bd490d85b2123e9a5f346c2bf961a7df78b621bc41e33b4001312c"
+        },
+        {
+          "path": "app/api/onsale/return/route.ts",
+          "changeKind": "verified_unchanged",
+          "beforeSha256": "sha256:7c97cd232cfcfa308f6083f2ea9ca3b10e282671a0a22558c7e550d94404c081",
+          "afterSha256": "sha256:7c97cd232cfcfa308f6083f2ea9ca3b10e282671a0a22558c7e550d94404c081"
+        },
+        {
+          "path": "app/api/onsale/session/route.ts",
+          "changeKind": "verified_unchanged",
+          "beforeSha256": "sha256:62ec24d367c012cdfb7360a096b8298c54e1030b7eb34d3c66804df1e39851cd",
+          "afterSha256": "sha256:62ec24d367c012cdfb7360a096b8298c54e1030b7eb34d3c66804df1e39851cd"
+        }
+      ],
+      "proofIds": [
+        "eval-v01-recovery:named_next_runtime",
+        "eval-v01-recovery:session_current_order_continuity",
+        "eval-v01-recovery:return_checkout",
+        "browser-receipt:event-mobile",
+        "browser-receipt:event-desktop"
+      ],
+      "claimBoundary": "This is deterministic local runtime and browser-origin proof. It does not prove a live provider return, hosted database continuity, deployment, or human comprehension."
+    }
+  ],
+  "approvedExperienceDeltas": [
+    {
+      "changeSetId": "v01-app-hero-and-exact-run",
+      "path": "src/App.tsx",
+      "contract": "Keep the accepted buyer composition while using the packaged event hero and linking a terminal result to its exact retained run when one exists.",
+      "beforeSha256": "sha256:3c624e54db44751b00089469687d8d7e8706d66af5fbff51b1a073cd07c98c70",
+      "afterSha256": "sha256:a68e887cae47b32eea67ced7d9d088d5d62e5fe6f617f9910c7ba058916b04c4",
+      "reason": "Remove the remote hero dependency, preserve the event hierarchy, announce the completed current run, and route the result action to /flows?run=<opaque-ref> without falling back to another run.",
+      "approvalReference": "user:v01-complete-holistic-and-tested:2026-08-09",
+      "proofIds": [
+        "browser-receipt:event-mobile",
+        "browser-receipt:event-desktop",
+        "eval-v01-recovery:recorded_runs_same_session_exact_run"
+      ],
+      "proof": {
+        "status": "passed",
+        "population": "current_candidate_browser",
+        "artifact": "../../../outputs/ONSALE_v01_RECOVERY_BROWSER_RECEIPT.json",
+        "artifactSha256": "sha256:81ac12ab75710d9c186d1c4496a2ebb21317174e4bfe8c2cfba073d5113c862e",
+        "claimBoundary": "The browser receipt proves the current event render and exact local origin. The intercepted Next browser gate owns exact-run no-fallback behavior."
+      }
+    },
+    {
+      "changeSetId": "v01-mechanism-rail-evidence-motion",
+      "path": "src/MechanismRail.tsx",
+      "contract": "Preserve the compact six-actor topology and singular amber token while projecting preparation, Pay, retrieve, and ticket handoffs from retained authority changes.",
+      "beforeSha256": "sha256:14f5aa28f442aa9bf21075b3756a17a77f3937c18bfaf1c5637cd99ccc18eb7a",
+      "afterSha256": "sha256:481795fcf35898248980290d0bcd761c2242038bce4db0d325bc922fed8fecc0",
+      "reason": "Restore the authored one-token sequence for checkout preparation, buyer Pay activation, same-payment retrieve, and exact one-charge ticket fulfillment without changing the approved trace geometry.",
+      "approvalReference": "user:v01-complete-holistic-and-tested:2026-08-09",
+      "proofIds": [
+        "browser-receipt:event-desktop",
+        "eval-v01-recovery:one_token_motion",
+        "eval-v01-recovery:static_history"
+      ],
+      "proof": {
+        "status": "passed",
+        "population": "current_candidate_browser",
+        "artifact": "../../../outputs/ONSALE_v01_RECOVERY_BROWSER_RECEIPT.json",
+        "artifactSha256": "sha256:81ac12ab75710d9c186d1c4496a2ebb21317174e4bfe8c2cfba073d5113c862e",
+        "claimBoundary": "The browser receipt proves the current rail renders without overflow or runtime errors. Component gates prove the one-token state contract. Motion-media capture remains blocked."
+      }
+    },
+    {
+      "changeSetId": "v01-flows-recorded-runs",
+      "path": "app/flows/FlowsGallery.tsx",
+      "contract": "Recorded Runs uses only the sanitized same-session read model; exact-run requests resolve to that run or a target-specific error with no fallback.",
+      "beforeSha256": "sha256:270ef509fb6907c45a1db36e651271bd5963e976846846e524ec68f9a8bc0913",
+      "afterSha256": "sha256:1512b2238823ca58436099ea8a907dc5edd4ea19cd610a3529750453788fcaf5",
+      "reason": "Replace compile-time Previous Runs with the read-only ledger, current-run completion signal, cursor-safe merge, and exact opaque run selection while keeping Story Lab separate.",
+      "approvalReference": "user:v01-complete-holistic-and-tested:2026-08-09",
+      "proofIds": [
+        "browser-receipt:flows-recorded",
+        "eval-v01-recovery:recorded_runs_same_session_exact_run",
+        "eval-v01-recovery:static_history"
+      ],
+      "proof": {
+        "status": "passed",
+        "population": "current_candidate_browser",
+        "artifact": "../../../outputs/ONSALE_v01_RECOVERY_BROWSER_RECEIPT.json",
+        "artifactSha256": "sha256:81ac12ab75710d9c186d1c4496a2ebb21317174e4bfe8c2cfba073d5113c862e",
+        "claimBoundary": "The current browser receipt proves the Recorded Runs surface. Hosted Neon history remains blocked and no fixture may substitute for an unavailable ledger."
+      }
+    },
+    {
+      "changeSetId": "v01-story-lab-six-subject-contract",
+      "path": "app/flows/replay.ts",
+      "contract": "Expose exactly the six accepted Story Lab IDs and keep all replay state deterministic and simulation-only.",
+      "beforeSha256": "sha256:78063a6650edef99f9fa69918ea99d5af0910d6ab8c110d36708ef3aac2d7909",
+      "afterSha256": "sha256:8ade0ba7e82cca534cd18622278cbd5816a8f0cdab2c1d53e9f7ef89f420e7ae",
+      "reason": "Restore the approved six-subject taxonomy and make replay transitions accept the selected retained or simulated flow without laundering simulation into Recorded Runs.",
+      "approvalReference": "user:v01-complete-holistic-and-tested:2026-08-09",
+      "proofIds": [
+        "browser-receipt:flows-story-lab",
+        "eval-v01-recovery:story_lab_six_accepted_ids",
+        "eval-v01-recovery:static_history"
+      ],
+      "proof": {
+        "status": "passed",
+        "population": "current_candidate_browser",
+        "artifact": "../../../outputs/ONSALE_v01_RECOVERY_BROWSER_RECEIPT.json",
+        "artifactSha256": "sha256:81ac12ab75710d9c186d1c4496a2ebb21317174e4bfe8c2cfba073d5113c862e",
+        "claimBoundary": "This proves a local deterministic Story Lab surface. It is not provider, merchant, or performance evidence."
+      }
+    },
+    {
+      "changeSetId": "v01-flows-ledger-actions",
+      "path": "app/flows/flows.module.css",
+      "contract": "Keep the accepted sharp cobalt workbench while making refresh and pagination actions legible and stateful.",
+      "beforeSha256": "sha256:ccc7087e6a4f6ea3a99d1f96e218c67291e6f96c9a8928ade0040d650104cc22",
+      "afterSha256": "sha256:e6af5565b26ae8f9a6450fa2d39f97e6f7bb415597d605658996e8836f4e9386",
+      "reason": "Add visible hover and disabled states for the Recorded Runs refresh and load-more actions without changing the page composition or introducing a new styling system.",
+      "approvalReference": "user:v01-complete-holistic-and-tested:2026-08-09",
+      "proofIds": [
+        "browser-receipt:flows-recorded",
+        "browser-receipt:flows-story-lab",
+        "browser-receipt:flows-story-lab-tablet",
+        "browser-receipt:flows-story-lab-mobile"
+      ],
+      "proof": {
+        "status": "passed",
+        "population": "current_candidate_browser",
+        "artifact": "../../../outputs/ONSALE_v01_RECOVERY_BROWSER_RECEIPT.json",
+        "artifactSha256": "sha256:81ac12ab75710d9c186d1c4496a2ebb21317174e4bfe8c2cfba073d5113c862e",
+        "claimBoundary": "The receipt proves current desktop containment and zero browser errors. Named-human comprehension and accessibility remain blocked."
+      }
+    },
+    {
+      "changeSetId": "v01-flows-loading-first-paint",
+      "path": "app/flows/FlowsGallery.tsx",
+      "contract": "Render the retained-run skeleton on the first paint instead of flashing an unavailable-ledger error before the owned read starts.",
+      "beforeSha256": "sha256:14cbd7080054b72f041cf0329d61bd43a9344e4c54b989e70da95d68fba555ea",
+      "afterSha256": "sha256:730d4688cb84b7341eee7118e92014390ff407e40cb521ee4d9a974bc25f0a47",
+      "reason": "The user observed a retry and no-selection error flashing before the useful skeleton. A typed loading seed now owns the first render; real request failures still retain their recovery action.",
+      "approvalReference": "user:final-polish-loading-state:2026-08-09",
+      "proofIds": [
+        "eval-v01-recovery:flows_initial_loading_state"
+      ],
+      "proof": {
+        "status": "passed",
+        "population": "focused_component_contract",
+        "artifact": "tests/domain/flows-v2.test.tsx",
+        "artifactSha256": null,
+        "claimBoundary": "This proves the initial rendered markup. The combined named-runtime browser gate remains the final visual authority."
+      }
+    },
+    {
+      "changeSetId": "v01-flows-loading-first-paint-style",
+      "path": "app/flows/flows.module.css",
+      "contract": "Keep the existing quiet ledger skeleton while adding one neutral line that explains the retained evidence wait.",
+      "beforeSha256": "sha256:5c5ffbeba3cd6854ac4064ccb2e767b4d9c354b98b5c1564aa5728fb3bfbc946",
+      "afterSha256": "sha256:358e6f940840815fc37e09775457fc8a7370ee35934ff1d4efd01b5d9cb53d85",
+      "reason": "The loading state now says Loading runs and Awaiting retained payment evidence without adding a card, spinner, or alternate visual language.",
+      "approvalReference": "user:final-polish-loading-state:2026-08-09",
+      "proofIds": [
+        "eval-v01-recovery:flows_initial_loading_state"
+      ],
+      "proof": {
+        "status": "passed",
+        "population": "focused_component_contract",
+        "artifact": "tests/domain/flows-v2.test.tsx",
+        "artifactSha256": null,
+        "claimBoundary": "This is a narrow loading-state style proof; responsive visual proof is rerun on the combined candidate."
+      }
+    },
+    {
+      "changeSetId": "v01-story-lab-outcome-led-titles",
+      "path": "app/flows/replay.ts",
+      "contract": "Keep the accepted six Story Lab subjects while naming each by the payment decision and consequence it teaches.",
+      "beforeSha256": "sha256:8ade0ba7e82cca534cd18622278cbd5816a8f0cdab2c1d53e9f7ef89f420e7ae",
+      "afterSha256": "sha256:4333e8acde6f82dd1aee321d6e3b3fb15f6e7a38a81c432368d4e7b2b3424e88",
+      "reason": "Internal labels such as Confirmed payment and Method versus connector lab did not tell a reviewer why the story exists. The six IDs, proof classes, evidence, steps, and replay behavior remain unchanged.",
+      "approvalReference": "user:final-polish-story-lab-writing:2026-08-09",
+      "proofIds": [
+        "eval-v01-recovery:story_lab_outcome_led_titles"
+      ],
+      "proof": {
+        "status": "passed",
+        "population": "focused_component_contract",
+        "artifact": "tests/domain/flows-v2.test.tsx",
+        "artifactSha256": null,
+        "claimBoundary": "This proves the exact six labels and unchanged deterministic catalog; final visual wrapping is checked on the combined browser candidate."
+      }
+    },
+    {
+      "changeSetId": "v01-story-lab-purpose-navigation",
+      "path": "app/flows/FlowsGallery.tsx",
+      "contract": "Explain that Story Lab contains six payment decisions and that each selected state is present because its business consequence matters.",
+      "beforeSha256": "sha256:730d4688cb84b7341eee7118e92014390ff407e40cb521ee4d9a974bc25f0a47",
+      "afterSha256": "sha256:a001884ef525516ef21340ca7edf48ed7d49ecc3d556c63569d436fc45e05df6",
+      "reason": "Replace generic Curated demos metadata with the reader job without changing workbench structure or replay controls.",
+      "approvalReference": "user:final-polish-story-lab-writing:2026-08-09",
+      "proofIds": [
+        "eval-v01-recovery:story_lab_outcome_led_titles"
+      ],
+      "proof": {
+        "status": "passed",
+        "population": "focused_component_contract",
+        "artifact": "tests/domain/flows-v2.test.tsx",
+        "artifactSha256": null,
+        "claimBoundary": "This is a content-hierarchy change only; browser proof owns final legibility."
+      }
+    },
+    {
+      "changeSetId": "v01-official-provider-overlay-containment",
+      "path": "src/index.css",
+      "contract": "Let the official Hyperswitch fullscreen iframe escape the checkout card and cover the ONSALE viewport without changing provider action logic.",
+      "beforeSha256": "sha256:70b5537217166fa9affce060f34efa84deaf56c26218272fd4fc5cb731a26b9d",
+      "afterSha256": "sha256:f83df4f3704e52cd8afd1af1efe45fe68b97533965d3de248329f11714fa63b2",
+      "reason": "The completed entrance animation retained an identity transform and the checkout card hid overflow, creating a containing and clipping block for Hyperswitch's position-fixed fullscreen iframe. Backwards fill preserves the entrance but releases the transform; only the provider card permits overflow.",
+      "approvalReference": "user:final-polish-provider-overlay:2026-08-09",
+      "proofIds": [
+        "eval-v01-recovery:official_provider_overlay_containment"
+      ],
+      "proof": {
+        "status": "passed",
+        "population": "focused_component_browser",
+        "artifact": "tests/e2e/onsale-checkout-c3.spec.ts",
+        "artifactSha256": "sha256:4bd407c5ce0fb0100b0cf4170428ef819af9b14e8cc158523fc840b28c7f7eb1",
+        "claimBoundary": "This proves ONSALE no longer clips a fullscreen iframe. The provider-owned inner card and approval controls remain cross-origin and are not restyled or simulated."
+      }
+    },
+    {
+      "changeSetId": "v01-ticket-wallet-generic-flows-link",
+      "path": "src/App.tsx",
+      "contract": "Open the complete Flows ledger from a fulfilled ticket instead of coupling the buyer action to an exact-run query.",
+      "beforeSha256": "sha256:a68e887cae47b32eea67ced7d9d088d5d62e5fe6f617f9910c7ba058916b04c4",
+      "afterSha256": "sha256:56e58f42af2120cbf3d9ce71fabaffce080cc64aec6f5c70ac6f099f45685a09",
+      "reason": "The prototype should always show the full run list. The fulfilled buyer action now uses the same stable /flows destination as the header.",
+      "approvalReference": "user:final-polish-generic-flows-link:2026-08-09",
+      "proofIds": [
+        "eval-v01-recovery:ticket_wallet_generic_flows_link"
+      ],
+      "proof": {
+        "status": "passed",
+        "population": "focused_component_browser",
+        "artifact": "tests/e2e/onsale-checkout-c3.spec.ts",
+        "artifactSha256": "sha256:a1846c876df66694180a5d496f5dcf326618a53bc90d965148be627753daa245",
+        "claimBoundary": "This proves the buyer link destination and label. It does not change run capture, ledger reads, or payment completion."
+      }
+    },
+    {
+      "changeSetId": "v01-rail-generic-flows-link",
+      "path": "src/MechanismRail.tsx",
+      "contract": "Use one stable /flows action in the payment rail rather than changing its destination by checkout state or run availability.",
+      "beforeSha256": "sha256:481795fcf35898248980290d0bcd761c2242038bce4db0d325bc922fed8fecc0",
+      "afterSha256": "sha256:8acbf955b64865590c9a00b9122ea70a9644b521bc4f9612d63815fe789c6a8b",
+      "reason": "A generic ledger destination preserves the full Previous Runs list and removes a fragile presentation-only query coupling.",
+      "approvalReference": "user:final-polish-generic-flows-link:2026-08-09",
+      "proofIds": [
+        "eval-v01-recovery:rail_generic_flows_link"
+      ],
+      "proof": {
+        "status": "passed",
+        "population": "focused_component_contract",
+        "artifact": "tests/domain/mechanism-rail-c2.test.tsx",
+        "artifactSha256": "sha256:690d7f58bd028e0338918354f89d3908e19302177c0f7099ec370d6d861c173b",
+        "claimBoundary": "This proves the rail link is stable. Trace facts, topology, motion, and replay controls are unchanged."
+      }
+    },
+    {
+      "changeSetId": "v01-saved-order-entry-guard",
+      "path": "src/App.tsx",
+      "contract": "Keep a completed buyer on the event surface when sale-entry controls are pressed and direct them to the saved ticket and explicit reset action.",
+      "beforeSha256": "sha256:56e58f42af2120cbf3d9ce71fabaffce080cc64aec6f5c70ac6f099f45685a09",
+      "afterSha256": "sha256:4c2d4c4f43f158c8c70529eca585d1f598d094eeee7f2ef314e01ec3a6599503",
+      "reason": "The eligibility and seat screens intentionally do not render while a durable checkout snapshot exists. Guarding both entry callbacks prevents the resulting blank state and explains the existing Buy Another Ticket reset path.",
+      "approvalReference": "user:final-polish-saved-ticket-entry:2026-08-09",
+      "proofIds": [
+        "eval-v01-recovery:saved_ticket_entry_guard"
+      ],
+      "proof": {
+        "status": "passed",
+        "population": "focused_component_browser",
+        "artifact": "tests/e2e/onsale-checkout-c3.spec.ts",
+        "artifactSha256": "sha256:b74d9ff38236578a4ec9b9c9c582d74151b0fd395366a2ec8a8a0da8cb018587",
+        "claimBoundary": "This proves both sale-entry controls remain on the event surface for a fulfilled order. The existing reset request, session rotation, payment, and ticket issuance logic are unchanged."
+      }
+    },
+    {
+      "changeSetId": "v01-ticket-wallet-recorded-payment-copy",
+      "path": "src/App.tsx",
+      "contract": "Keep the stable /flows destination while naming the fulfilled-order action by the recorded payment the reviewer expects to inspect.",
+      "beforeSha256": "sha256:4c2d4c4f43f158c8c70529eca585d1f598d094eeee7f2ef314e01ec3a6599503",
+      "afterSha256": "sha256:36f318884f0880c22a5e45b6aa6809a7c4b9196c50bcf844607186aab8804582",
+      "reason": "Open Flows described the destination but not the reviewer job. The requested label restores the payment-specific meaning without restoring the fragile run query.",
+      "approvalReference": "user:ticket-wallet-recorded-payment-copy:2026-08-10",
+      "proofIds": ["eval-v01-recovery:ticket_wallet_recorded_payment_copy"],
+      "proof": {
+        "status": "passed",
+        "population": "focused_component_browser",
+        "artifact": "tests/e2e/onsale-checkout-c3.spec.ts",
+        "artifactSha256": "sha256:5fa737a6fe128224d3cd5306ffd0d5b538d592ba8ad252e8b03818b252e6157c",
+        "claimBoundary": "The label and /flows href are covered. Recorded-run selection and ledger contents are unchanged."
+      }
+    },
+    {
+      "changeSetId": "v01-saved-order-banner-reset-action",
+      "path": "src/App.tsx",
+      "contract": "Offer the fulfilled buyer a direct Buy Another Ticket action beside View Your Tickets on the saved-order banner.",
+      "beforeSha256": "sha256:36f318884f0880c22a5e45b6aa6809a7c4b9196c50bcf844607186aab8804582",
+      "afterSha256": "sha256:5678b645bce216d46a15768988813eb18a0885a18acc6f62021e8723def5108e",
+      "reason": "A buyer returning home after fulfillment should not have to reopen the ticket wallet to discover the existing reset path. The banner now invokes the same guarded reset operation directly.",
+      "approvalReference": "user:saved-order-reset-cta:2026-08-10",
+      "proofIds": ["eval-v01-recovery:saved_order_banner_reset"],
+      "proof": {
+        "status": "passed",
+        "population": "focused_component_browser",
+        "artifact": "tests/e2e/onsale-checkout-c3.spec.ts",
+        "artifactSha256": "sha256:79b39f16dcb86bae6e463c32b80c520f8b1eda376756c40faa16f096cd81d7d5",
+        "claimBoundary": "The banner action and one reset request are covered. The server continues to preserve the anonymous history identity while clearing the active order pointer."
+      }
+    },
+    {
+      "changeSetId": "v01-saved-order-banner-action-layout",
+      "path": "src/index.css",
+      "contract": "Keep View Your Tickets and Buy Another Ticket adjacent, legible, and visually distinct at desktop and narrow widths.",
+      "beforeSha256": "sha256:f83df4f3704e52cd8afd1af1efe45fe68b97533965d3de248329f11714fa63b2",
+      "afterSha256": "sha256:e9a7c0310b02417e49af5cf06817a8fbb6d594d324fe1673197d2ca431992cf4",
+      "reason": "The primary action remains filled while the destructive-to-current-progress reset action is outlined; both retain the existing control size contract.",
+      "approvalReference": "user:saved-order-reset-cta:2026-08-10",
+      "proofIds": ["eval-v01-recovery:saved_order_banner_reset"],
+      "proof": {
+        "status": "passed",
+        "population": "focused_component_browser",
+        "artifact": "tests/e2e/onsale-checkout-c3.spec.ts",
+        "artifactSha256": "sha256:79b39f16dcb86bae6e463c32b80c520f8b1eda376756c40faa16f096cd81d7d5",
+        "claimBoundary": "This covers the action grouping and reset request; final named-runtime visual inspection remains separate."
+      }
+    },
+    {
+      "changeSetId": "v01-provider-overlay-responsive-viewport",
+      "path": "src/index.css",
+      "contract": "Keep the official Hyperswitch action iframe isolated from document flow and give its provider-owned content a responsive viewport large enough for desktop and tablet controls.",
+      "beforeSha256": "sha256:e9a7c0310b02417e49af5cf06817a8fbb6d594d324fe1673197d2ca431992cf4",
+      "afterSha256": "sha256:6b57d767974a6464f453e5913cabc3090cba22f0baa6e965e4cbe5c36709458c",
+      "reason": "Hyperswitch injects the official fullscreen iframe under a generated wrapper. The wrapper could retain flow dimensions, while the provider test page was squeezed into a narrow responsive breakpoint. A fixed zero-size mount prevents layout bleed; a centered dynamic viewport widens the official frame above 600px while mobile remains one viewport wide.",
+      "approvalReference": "user:provider-overlay-sizing-and-flow-isolation:2026-08-10",
+      "proofIds": ["eval-v01-recovery:provider_overlay_viewport_isolation"],
+      "proof": {
+        "status": "passed",
+        "population": "focused_component_browser",
+        "artifact": "tests/e2e/onsale-checkout-c3.spec.ts",
+        "artifactSha256": "sha256:bc5e6018dcf196c85068978b3b5a2a237949c5acc06d015e91b75dff005bc1b7",
+        "claimBoundary": "The test proves full dynamic viewport height, widened desktop viewport, no document-height growth, and zero root overflow. The nested provider page remains official cross-origin content and was not rewritten."
+      }
+    },
+    {
+      "changeSetId": "v01-app-shell-viewport-containment",
+      "path": "src/index.css",
+      "contract": "Keep the ONSALE application shell pinned to the visible viewport so provider mount residue cannot expose the root document below it.",
+      "beforeSha256": "sha256:6b57d767974a6464f453e5913cabc3090cba22f0baa6e965e4cbe5c36709458c",
+      "afterSha256": "sha256:4a5978a9eda41c15565940e5e31101d3c80cbda0587aca6c2aee6fc554b04099",
+      "reason": "The shell was a normal-flow 100vh element. If an injected provider mount extended the outer document, scrolling could move the whole shell upward and reveal a large white root area. Only ONSALE app pages are now fixed to the dynamic viewport; the Flows document keeps normal scrolling.",
+      "approvalReference": "user:remove-trailing-white-shell-gap:2026-08-10",
+      "proofIds": ["eval-v01-recovery:app_shell_viewport_containment"],
+      "proof": {
+        "status": "passed",
+        "population": "focused_component_browser",
+        "artifact": "tests/e2e/onsale-checkout-c3.spec.ts",
+        "artifactSha256": "sha256:2cb766199f47d2e56e177c930dc022bc67d235a2b88a8eaeb3650c9492a65a41",
+        "claimBoundary": "The exact 1538 by 746 regression proves the shell is fixed at y=0, fills the viewport, and the provider overlay remains document-flow isolated. Payment, session, ticket, and Flows behavior are unchanged."
+      }
+    },
+    {
+      "changeSetId": "v01-saved-order-reset-all-stages",
+      "path": "src/App.tsx",
+      "contract": "Expose the existing Buy Another Ticket reset action on Home for every saved checkout stage, not only fulfilled tickets.",
+      "beforeSha256": "sha256:5678b645bce216d46a15768988813eb18a0885a18acc6f62021e8723def5108e",
+      "afterSha256": "sha256:0cfc75b5fc4e69d0dc45b28729806cd349109425a69f603901a94ca255c44f03",
+      "reason": "Checkout-ready and failure states could return Home with only Resume available, trapping a reviewer in the saved order. The banner now invokes the same guarded reset operation for all saved stages.",
+      "approvalReference": "user:saved-checkout-failure-reset-cta:2026-08-10",
+      "proofIds": ["eval-v01-recovery:saved_order_reset_all_stages"],
+      "proof": {
+        "status": "passed",
+        "population": "focused_component_browser",
+        "artifact": "tests/e2e/onsale-checkout-c3.spec.ts",
+        "artifactSha256": "sha256:0084c49f5a73e9e31e4279249d711183b4a171a7519f6f974a6cbcd770d9062a",
+        "claimBoundary": "Checkout-ready and review-required Home banners expose Buy Another Ticket. The reset endpoint and payment, fulfillment, and ticket issuance logic are unchanged."
+      }
+    },
+    {
+      "changeSetId": "v01-provider-overlay-wide-css-viewport",
+      "path": "src/index.css",
+      "contract": "Give the official Hyperswitch iframe a wide CSS viewport so its own responsive Klarna and Affirm modal clears the narrow percentage-width breakpoint.",
+      "beforeSha256": "sha256:4a5978a9eda41c15565940e5e31101d3c80cbda0587aca6c2aee6fc554b04099",
+      "afterSha256": "sha256:5e271aaf7daa3a2c1552bded0c385d784585d52ea59bce5711ec50deef8f274b",
+      "reason": "The provider-owned modal uses responsive percentage widths inside a cross-origin iframe. At the previous 1800 pixel cap its 2xl width remained about 486 pixels. A centered 2100 pixel CSS viewport yields at least 567 pixels for that provider breakpoint while ONSALE continues to isolate the iframe from document flow.",
+      "approvalReference": "user:klarna-affirm-modal-clipping-final-pass:2026-08-10",
+      "proofIds": ["eval-v01-recovery:provider_overlay_wide_css_viewport"],
+      "proof": {
+        "status": "passed",
+        "population": "focused_component_browser",
+        "artifact": "tests/e2e/onsale-checkout-c3.spec.ts",
+        "artifactSha256": "sha256:53e834035d13a2a61efa7b40a91adefd2521e58769d9ac704689a2b0157b49cb",
+        "claimBoundary": "The merchant page proves a 2100 pixel official iframe viewport, full dynamic height, fixed flow isolation, and zero root overflow. The provider's cross-origin Tailwind markup cannot be rewritten by ONSALE and a real provider completion remains separate proof."
+      }
+    }
+  ]
+}

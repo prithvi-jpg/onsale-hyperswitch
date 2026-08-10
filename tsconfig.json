@@ -1,0 +1,35 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "useDefineForClassFields": true,
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+    "moduleResolution": "bundler",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+    "allowImportingTsExtensions": true,
+    "allowJs": true,
+    "resolveJsonModule": true,
+    "incremental": true,
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "types": ["node"],
+    "plugins": [{ "name": "next" }],
+    "strict": true,
+    "noFallthroughCasesInSwitch": true
+  },
+  "include": [
+    "next-env.d.ts",
+    ".next/types/**/*.ts",
+    ".next/dev/types/**/*.ts",
+    "app",
+    "src",
+    "vite.config.ts"
+  ],
+  "exclude": ["node_modules"]
+}

@@ -1,0 +1,10 @@
+{
+  "description": "Streamline live-event ticket purchases with a fast, secure 3-step process for buyers and comprehensive transaction tracking for payment reviewers.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}

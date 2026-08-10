@@ -1,0 +1,495 @@
+{
+  "schema": "onsale.eval-v01-recovery.v1",
+  "generatedAt": "2026-08-09T21:08:02.138Z",
+  "evaluatorVersion": "1.0.0",
+  "candidate": {
+    "digest": "sha256:92a3c75d4738deaddfd766725ad86515910595c0a7982665cc47fb8f7dc09367",
+    "beforeDigest": "sha256:92a3c75d4738deaddfd766725ad86515910595c0a7982665cc47fb8f7dc09367",
+    "afterDigest": "sha256:92a3c75d4738deaddfd766725ad86515910595c0a7982665cc47fb8f7dc09367",
+    "stable": true,
+    "fileCount": 180,
+    "totalBytes": 5695726,
+    "exclusions": [
+      ".git/",
+      ".audit/",
+      ".next/",
+      ".cache/",
+      "artifacts/",
+      "coverage/",
+      "node_modules/",
+      "test-results/",
+      "next-env.d.ts",
+      "tsconfig.tsbuildinfo"
+    ]
+  },
+  "runtime": {
+    "nodeVersion": "v22.23.2",
+    "nextVersion": "16.3.0",
+    "packageManager": "pnpm@10.34.3",
+    "namedOrigin": "http://onsale-v01.localhost:4310",
+    "namedRuntimeProofClass": "deterministic_local_contract",
+    "dependencyRoot": "/tmp/onsale-c3-final.mR0R4R/node_modules"
+  },
+  "commands": {
+    "run": "bash scripts/eval-v01-recovery.sh",
+    "evaluatorTest": "/tmp/onsale-node22/node-v22.23.2-linux-x64/bin/node --test evals/v01-recovery-evaluator.test.mjs",
+    "unit": "bash scripts/native-node22.sh test tests/server/portless-local-preview.test.ts tests/server/local-preview-runtime.test.ts tests/server/onsale-session.test.ts tests/server/onsale-checkout-route-runtime.test.ts tests/domain/flows-v2.test.tsx tests/domain/flows-recorded-runs-v01.test.ts tests/domain/payment-trace-v01.test.tsx tests/domain/mechanism-rail-c2.test.tsx --reporter=json",
+    "browser": "/tmp/onsale-node22/node-v22.23.2-linux-x64/bin/node node_modules/@playwright/test/cli.js test tests/next-e2e/onsale-flows-v01-recovery.spec.ts --config=playwright.next.config.ts --reporter=json"
+  },
+  "localRecoveryStatus": "passed",
+  "localGates": [
+    {
+      "id": "candidate_identity",
+      "label": "One stable candidate digest",
+      "status": "passed",
+      "evidence": [
+        {
+          "kind": "candidate_digest",
+          "name": "digest unchanged while evidence ran",
+          "status": "passed"
+        }
+      ],
+      "claimBoundary": "A changed digest invalidates the run rather than attaching evidence to a moving candidate."
+    },
+    {
+      "id": "protected_experience_deltas",
+      "label": "Protected v0.1 experience deltas",
+      "status": "passed",
+      "evidence": [
+        {
+          "kind": "protected_experience_receipt",
+          "name": ".audit/v01-recovery-base.json",
+          "status": "passed",
+          "changedFiles": [
+            {
+              "path": "app/flows/flows.module.css",
+              "beforeSha256": "sha256:ccc7087e6a4f6ea3a99d1f96e218c67291e6f96c9a8928ade0040d650104cc22",
+              "afterSha256": "sha256:e6af5565b26ae8f9a6450fa2d39f97e6f7bb415597d605658996e8836f4e9386",
+              "approvalStatus": "receipted",
+              "reason": "Add visible hover and disabled states for the Recorded Runs refresh and load-more actions without changing the page composition or introducing a new styling system.",
+              "approvalReference": "user:v01-complete-holistic-and-tested:2026-08-09",
+              "proof": {
+                "status": "passed",
+                "population": "current_candidate_browser",
+                "artifact": "../../../outputs/ONSALE_v01_RECOVERY_BROWSER_RECEIPT.json",
+                "artifactSha256": "sha256:81ac12ab75710d9c186d1c4496a2ebb21317174e4bfe8c2cfba073d5113c862e",
+                "claimBoundary": "The receipt proves current desktop containment and zero browser errors. Named-human comprehension and accessibility remain blocked."
+              }
+            },
+            {
+              "path": "app/flows/FlowsGallery.tsx",
+              "beforeSha256": "sha256:270ef509fb6907c45a1db36e651271bd5963e976846846e524ec68f9a8bc0913",
+              "afterSha256": "sha256:1512b2238823ca58436099ea8a907dc5edd4ea19cd610a3529750453788fcaf5",
+              "approvalStatus": "receipted",
+              "reason": "Replace compile-time Previous Runs with the read-only ledger, current-run completion signal, cursor-safe merge, and exact opaque run selection while keeping Story Lab separate.",
+              "approvalReference": "user:v01-complete-holistic-and-tested:2026-08-09",
+              "proof": {
+                "status": "passed",
+                "population": "current_candidate_browser",
+                "artifact": "../../../outputs/ONSALE_v01_RECOVERY_BROWSER_RECEIPT.json",
+                "artifactSha256": "sha256:81ac12ab75710d9c186d1c4496a2ebb21317174e4bfe8c2cfba073d5113c862e",
+                "claimBoundary": "The current browser receipt proves the Recorded Runs surface. Hosted Neon history remains blocked and no fixture may substitute for an unavailable ledger."
+              }
+            },
+            {
+              "path": "app/flows/replay.ts",
+              "beforeSha256": "sha256:78063a6650edef99f9fa69918ea99d5af0910d6ab8c110d36708ef3aac2d7909",
+              "afterSha256": "sha256:8ade0ba7e82cca534cd18622278cbd5816a8f0cdab2c1d53e9f7ef89f420e7ae",
+              "approvalStatus": "receipted",
+              "reason": "Restore the approved six-subject taxonomy and make replay transitions accept the selected retained or simulated flow without laundering simulation into Recorded Runs.",
+              "approvalReference": "user:v01-complete-holistic-and-tested:2026-08-09",
+              "proof": {
+                "status": "passed",
+                "population": "current_candidate_browser",
+                "artifact": "../../../outputs/ONSALE_v01_RECOVERY_BROWSER_RECEIPT.json",
+                "artifactSha256": "sha256:81ac12ab75710d9c186d1c4496a2ebb21317174e4bfe8c2cfba073d5113c862e",
+                "claimBoundary": "This proves a local deterministic Story Lab surface. It is not provider, merchant, or performance evidence."
+              }
+            },
+            {
+              "path": "src/App.tsx",
+              "beforeSha256": "sha256:3c624e54db44751b00089469687d8d7e8706d66af5fbff51b1a073cd07c98c70",
+              "afterSha256": "sha256:a68e887cae47b32eea67ced7d9d088d5d62e5fe6f617f9910c7ba058916b04c4",
+              "approvalStatus": "receipted",
+              "reason": "Remove the remote hero dependency, preserve the event hierarchy, announce the completed current run, and route the result action to /flows?run=<opaque-ref> without falling back to another run.",
+              "approvalReference": "user:v01-complete-holistic-and-tested:2026-08-09",
+              "proof": {
+                "status": "passed",
+                "population": "current_candidate_browser",
+                "artifact": "../../../outputs/ONSALE_v01_RECOVERY_BROWSER_RECEIPT.json",
+                "artifactSha256": "sha256:81ac12ab75710d9c186d1c4496a2ebb21317174e4bfe8c2cfba073d5113c862e",
+                "claimBoundary": "The browser receipt proves the current event render and exact local origin. The intercepted Next browser gate owns exact-run no-fallback behavior."
+              }
+            },
+            {
+              "path": "src/MechanismRail.tsx",
+              "beforeSha256": "sha256:14f5aa28f442aa9bf21075b3756a17a77f3937c18bfaf1c5637cd99ccc18eb7a",
+              "afterSha256": "sha256:481795fcf35898248980290d0bcd761c2242038bce4db0d325bc922fed8fecc0",
+              "approvalStatus": "receipted",
+              "reason": "Restore the authored one-token sequence for checkout preparation, buyer Pay activation, same-payment retrieve, and exact one-charge ticket fulfillment without changing the approved trace geometry.",
+              "approvalReference": "user:v01-complete-holistic-and-tested:2026-08-09",
+              "proof": {
+                "status": "passed",
+                "population": "current_candidate_browser",
+                "artifact": "../../../outputs/ONSALE_v01_RECOVERY_BROWSER_RECEIPT.json",
+                "artifactSha256": "sha256:81ac12ab75710d9c186d1c4496a2ebb21317174e4bfe8c2cfba073d5113c862e",
+                "claimBoundary": "The browser receipt proves the current rail renders without overflow or runtime errors. Component gates prove the one-token state contract. Motion-media capture remains blocked."
+              }
+            }
+          ],
+          "missingFiles": []
+        }
+      ],
+      "claimBoundary": "A protected file may differ only through an exact before/after receipt, direct approval reference, and current-candidate browser proof."
+    },
+    {
+      "id": "named_next_runtime",
+      "label": "Exact named Next runtime contract",
+      "status": "passed",
+      "proofClass": "deterministic_local_contract",
+      "claimBoundary": "Pins the Node, Next, Portless name, origin, cookie policy, and App Router contract. It is not live-provider or hosted-runtime proof.",
+      "evidence": [
+        {
+          "kind": "runtime_check",
+          "name": "node=v22.23.2",
+          "status": "passed"
+        },
+        {
+          "kind": "runtime_check",
+          "name": "next=16.3.0",
+          "status": "passed"
+        },
+        {
+          "kind": "runtime_check",
+          "name": "packageManager=pnpm@10.34.3",
+          "status": "passed"
+        },
+        {
+          "kind": "runtime_check",
+          "name": "default-dev=named-next",
+          "status": "passed"
+        },
+        {
+          "kind": "runtime_check",
+          "name": "mise-node=22.23.2",
+          "status": "passed"
+        },
+        {
+          "kind": "runtime_check",
+          "name": "linux-native-dependencies",
+          "status": "passed"
+        },
+        {
+          "kind": "runtime_check",
+          "name": "evaluator-self-test",
+          "status": "passed"
+        },
+        {
+          "kind": "vitest_assertion",
+          "name": "v0.1 exact local runtime environment atomically derives origin and cookie policy from Portless http://onsale-v01.localhost:4310",
+          "status": "passed"
+        },
+        {
+          "kind": "vitest_assertion",
+          "name": "v0.1 exact local runtime environment rejects Portless origin drift http://onsale-v01.localhost:4311 before Next starts",
+          "status": "passed"
+        },
+        {
+          "kind": "vitest_assertion",
+          "name": "v0.1 exact local runtime environment binds Next to the private socket Portless assigned",
+          "status": "passed"
+        },
+        {
+          "kind": "vitest_assertion",
+          "name": "v0.1 isolated named Portless launcher uses an explicit stable name and project-scoped state",
+          "status": "passed"
+        },
+        {
+          "kind": "vitest_assertion",
+          "name": "v0.1 isolated named Portless launcher pins the Node-22-compatible Portless and makes Next the default runtime",
+          "status": "passed"
+        },
+        {
+          "kind": "vitest_assertion",
+          "name": "C3 checkout App Router boundary exposes only the dynamic Node handlers for prepare, retrieve-only reconcile, and return",
+          "status": "passed"
+        }
+      ]
+    },
+    {
+      "id": "session_current_order_continuity",
+      "label": "Session and current-order continuity",
+      "status": "passed",
+      "proofClass": "deterministic_local_contract",
+      "claimBoundary": "Proves the anonymous-session and HttpOnly current-order contract without claiming a provider action.",
+      "evidence": [
+        {
+          "kind": "vitest_assertion",
+          "name": "C2 anonymous session boundary reuses one valid cookie across refresh and rotates malformed candidates",
+          "status": "passed"
+        },
+        {
+          "kind": "vitest_assertion",
+          "name": "C3 checkout App Router boundary carries the two discrete prepare cookies into a cookie-only reconcile reload",
+          "status": "passed"
+        },
+        {
+          "kind": "vitest_assertion",
+          "name": "C3 checkout App Router boundary requires the existing HttpOnly session and order pointer for retrieve-only reconcile",
+          "status": "passed"
+        },
+        {
+          "kind": "vitest_assertion",
+          "name": "C3 checkout App Router boundary retains the bounded HttpOnly order pointer intentionally across unknown and terminal projections",
+          "status": "passed"
+        }
+      ]
+    },
+    {
+      "id": "return_checkout",
+      "label": "Provider return resolves to /checkout",
+      "status": "passed",
+      "proofClass": "deterministic_local_contract",
+      "claimBoundary": "Proves query stripping, same-order cookie continuity, and the exact clean return. It does not prove a current provider callback.",
+      "evidence": [
+        {
+          "kind": "vitest_assertion",
+          "name": "C3 checkout App Router boundary carries the two discrete prepare cookies into a cookie-only reconcile reload",
+          "status": "passed"
+        },
+        {
+          "kind": "vitest_assertion",
+          "name": "C3 checkout App Router boundary ignores every provider query value and performs a pure 303 strip with no provider or database work",
+          "status": "passed"
+        }
+      ]
+    },
+    {
+      "id": "story_lab_six_accepted_ids",
+      "label": "Six accepted Story Lab subjects",
+      "status": "passed",
+      "proofClass": "local_simulation_contract",
+      "claimBoundary": "All six subjects remain local simulations and cannot enter Recorded Runs.",
+      "expectedIds": [
+        "confirmed-payment",
+        "action-required",
+        "terminal-decline",
+        "lost-response-recovery",
+        "fixture-label-counterexample",
+        "checkout-configuration-boundary"
+      ],
+      "evidence": [
+        {
+          "kind": "vitest_assertion",
+          "name": "ONSALE recorded flow replay isolates one deterministic multi-attempt simulation inside Story Lab",
+          "status": "passed"
+        },
+        {
+          "kind": "vitest_assertion",
+          "name": "ONSALE v0.1 durable Recorded Runs boundary keeps all six Story Lab subjects outside the durable ledger",
+          "status": "passed"
+        },
+        {
+          "kind": "vitest_assertion",
+          "name": "ONSALE v0.1 durable Recorded Runs boundary rejects Story Lab simulation if it reaches the Recorded Runs adapter",
+          "status": "passed"
+        }
+      ]
+    },
+    {
+      "id": "recorded_runs_same_session_exact_run",
+      "label": "Same-session Recorded Runs and exact-run no-fallback",
+      "status": "passed",
+      "proofClass": "deterministic_local_browser_fixture",
+      "claimBoundary": "The rendered browser cases use intercepted read-only run fixtures. They do not prove hosted Neon history.",
+      "evidence": [
+        {
+          "kind": "vitest_assertion",
+          "name": "ONSALE v0.1 durable Recorded Runs boundary walks the sanitized cursor with GET-only reads to find an exact completed run",
+          "status": "passed"
+        },
+        {
+          "kind": "vitest_assertion",
+          "name": "ONSALE v0.1 durable Recorded Runs boundary selects a completed exact run idempotently without losing older pages or cursor",
+          "status": "passed"
+        },
+        {
+          "kind": "vitest_assertion",
+          "name": "ONSALE v0.1 durable Recorded Runs boundary announces and returns one terminal current run from one GET",
+          "status": "passed"
+        },
+        {
+          "kind": "vitest_assertion",
+          "name": "ONSALE v0.1 durable Recorded Runs boundary returns RUN_NOT_FOUND for missing detail and an empty current-run read",
+          "status": "passed"
+        },
+        {
+          "kind": "next_browser_assertion",
+          "name": "Recorded Runs stays static on selection, replays explicitly, and merges the just-completed run",
+          "status": "passed"
+        },
+        {
+          "kind": "next_browser_assertion",
+          "name": "an exact later-page run target resolves without rendering the newest different run",
+          "status": "passed"
+        },
+        {
+          "kind": "next_browser_assertion",
+          "name": "a cross-buyer exact target renders not-found and never walks or substitutes the visible ledger",
+          "status": "passed"
+        }
+      ]
+    },
+    {
+      "id": "unknown_received_amount_nullable",
+      "label": "Unknown received amount remains null",
+      "status": "passed",
+      "proofClass": "deterministic_local_contract",
+      "claimBoundary": "Zero cannot stand in for unknown received money; success still requires exact received money.",
+      "evidence": [
+        {
+          "kind": "vitest_assertion",
+          "name": "ONSALE v0.1 durable Recorded Runs boundary keeps unproven received money unknown while retaining exact succeeded money",
+          "status": "passed"
+        },
+        {
+          "kind": "vitest_assertion",
+          "name": "ONSALE recorded flow replay replays the local two-attempt circuit without revealing received money early",
+          "status": "passed"
+        }
+      ]
+    },
+    {
+      "id": "one_token_motion",
+      "label": "Preparation, Pay, retrieve, and ticket one-token motion",
+      "status": "passed",
+      "proofClass": "deterministic_component_motion_contract",
+      "claimBoundary": "Proves the authored state-to-motion contract and one-token DOM invariant, not a captured real-time browser sequence.",
+      "evidence": [
+        {
+          "kind": "vitest_assertion",
+          "name": "production mechanism-rail trace uses the accepted trace map while checkout is being prepared",
+          "status": "passed"
+        },
+        {
+          "kind": "vitest_assertion",
+          "name": "production mechanism-rail trace animates one buyer intent handoff when Pay activates without claiming an outcome",
+          "status": "passed"
+        },
+        {
+          "kind": "vitest_assertion",
+          "name": "production mechanism-rail trace animates one authoritative retrieve delta even when its retained facts change",
+          "status": "passed"
+        },
+        {
+          "kind": "vitest_assertion",
+          "name": "production mechanism-rail trace moves the verified terminal handoff to tickets only with one charge and exact cardinality",
+          "status": "passed"
+        },
+        {
+          "kind": "vitest_assertion",
+          "name": "ONSALE v0.1 shared payment trace renders one slow amber core-and-halo signal only for a valid evidence-linked handoff",
+          "status": "passed"
+        },
+        {
+          "kind": "vitest_assertion",
+          "name": "ONSALE v0.1 shared payment trace fails closed when an event tuple or attempt evidence does not match the fixed topology",
+          "status": "passed"
+        }
+      ]
+    },
+    {
+      "id": "static_history",
+      "label": "Historical selection stays static until Replay",
+      "status": "passed",
+      "proofClass": "deterministic_local_browser_fixture",
+      "claimBoundary": "Historic facts do not animate on selection; explicit Replay is the only motion authority.",
+      "evidence": [
+        {
+          "kind": "vitest_assertion",
+          "name": "ONSALE v0.1 shared payment trace keeps hydration and historical selection static, then replays only on an explicit replay branch",
+          "status": "passed"
+        },
+        {
+          "kind": "vitest_assertion",
+          "name": "ONSALE recorded flow replay keeps historical selection still and authorizes only retained replay handoffs",
+          "status": "passed"
+        },
+        {
+          "kind": "next_browser_assertion",
+          "name": "Recorded Runs stays static on selection, replays explicitly, and merges the just-completed run",
+          "status": "passed"
+        }
+      ]
+    }
+  ],
+  "unitPopulation": {
+    "id": "focused_vitest",
+    "status": "passed",
+    "total": 92,
+    "passed": 92,
+    "failed": 0,
+    "reportSha256": "sha256:b3709b8092f69a19422e53c528cb09123d212e8da6dbdc3b0968b10573f2efb3",
+    "reportError": null,
+    "command": "bash scripts/native-node22.sh test tests/server/portless-local-preview.test.ts tests/server/local-preview-runtime.test.ts tests/server/onsale-session.test.ts tests/server/onsale-checkout-route-runtime.test.ts tests/domain/flows-v2.test.tsx tests/domain/flows-recorded-runs-v01.test.ts tests/domain/payment-trace-v01.test.tsx tests/domain/mechanism-rail-c2.test.tsx --reporter=json",
+    "exitCode": 0,
+    "signal": null,
+    "stdoutSha256": "sha256:a363bc0305b73113f0b3b0cc9945497adcd0050a17465427ffaa8c1454e4bc05",
+    "stderrSha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "browserPopulation": {
+    "id": "next_browser_read_fixture",
+    "status": "passed",
+    "proofClass": "intercepted_read_only_fixture",
+    "total": 4,
+    "passed": 4,
+    "failed": 0,
+    "reportSha256": "sha256:7629d007499801ddbef9e192101b88e3658302776eaeb557232702aa401a9904",
+    "reportError": null,
+    "command": "/tmp/onsale-node22/node-v22.23.2-linux-x64/bin/node node_modules/@playwright/test/cli.js test tests/next-e2e/onsale-flows-v01-recovery.spec.ts --config=playwright.next.config.ts --reporter=json",
+    "exitCode": 0,
+    "signal": null,
+    "stdoutSha256": "sha256:9f49a4952c2c21653ecb6f322aa1a0b859aa1a57d1d97c5e8bc49ee784fab162",
+    "stderrSha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "releaseStatus": "blocked",
+  "externalPopulations": [
+    {
+      "id": "live_provider",
+      "status": "blocked",
+      "owner": "official Hyperswitch sandbox action, return, retrieve, and repeat return",
+      "blocker": "No current-candidate provider transaction was authorized or run by this evaluator."
+    },
+    {
+      "id": "hosted_neon",
+      "status": "blocked",
+      "owner": "hosted Neon migration plus isolated write and readback",
+      "blocker": "The evaluator makes no hosted database connection or mutation."
+    },
+    {
+      "id": "deployment",
+      "status": "blocked",
+      "owner": "hosted origin, cookie, return URL, environment, revision, and post-deploy readback",
+      "blocker": "Deployment and publication remain separately approval-gated."
+    },
+    {
+      "id": "named_human",
+      "status": "blocked",
+      "owner": "named-human comprehension and assistive-technology review",
+      "blocker": "Synthetic and automated checks cannot satisfy human evidence."
+    },
+    {
+      "id": "motion_media",
+      "status": "blocked",
+      "owner": "current-candidate preparation, Pay, return, retrieve, and ticket motion capture",
+      "blocker": "Component assertions are not a motion capture."
+    }
+  ],
+  "releaseBlockers": [
+    "live_provider",
+    "hosted_neon",
+    "deployment",
+    "named_human",
+    "motion_media"
+  ]
+}
