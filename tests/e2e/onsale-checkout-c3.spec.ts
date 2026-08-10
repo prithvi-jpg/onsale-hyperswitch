@@ -604,7 +604,12 @@ test("fulfilled checkout renders a four-item buyer ticket wallet without enginee
 test("a saved ticket blocks sale re-entry until Buy Another Ticket resets it", async ({
   page,
 }) => {
+  let resetRequests = 0
   await installTerminalCheckout(page, fulfilledCheckout, 4)
+  await page.route("**/api/onsale/demo/reset", async (route) => {
+    resetRequests += 1
+    await route.fulfill({ status: 204, body: "" })
+  })
   await page.goto("/")
   await page.getByRole("button", { name: "ONSALE home" }).click()
 
@@ -614,6 +619,15 @@ test("a saved ticket blocks sale re-entry until Buy Another Ticket resets it", a
   await expect(
     page.getByRole("button", { name: "VIEW YOUR TICKETS →" }),
   ).toBeVisible()
+  const bannerReset = page.getByRole("button", {
+    name: "BUY ANOTHER TICKET →",
+  })
+  await expect(bannerReset).toBeVisible()
+  await expect(
+    page.getByTestId("inventory-checkout-resume").locator(
+      ".inventory-checkout-resume-actions",
+    ),
+  ).toContainText("VIEW YOUR TICKETS →BUY ANOTHER TICKET →")
 
   await page.getByRole("button", { name: "VIEW LIVE SEATS →" }).click()
   await expect(
@@ -629,6 +643,9 @@ test("a saved ticket blocks sale re-entry until Buy Another Ticket resets it", a
   await expect(
     page.getByRole("heading", { name: "PHANTOM CIRCUIT" }),
   ).toBeVisible()
+
+  await bannerReset.click()
+  await expect.poll(() => resetRequests).toBe(1)
 })
 
 test("review-required checkout keeps the same payment recoverable without a stale grant or ticket", async ({

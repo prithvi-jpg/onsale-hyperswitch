@@ -526,6 +526,7 @@ function EventScreen({
   resumeCheckout?: {
     readonly label: string
     readonly onResume: () => void
+    readonly onStartOver?: () => void
   }
 }) {
   const inventoryNoticeRef = useRef<HTMLDivElement>(null)
@@ -657,9 +658,20 @@ function EventScreen({
               Payment and ticket state stay attached to this browser session.
             </strong>
           </div>
-          <button type="button" onClick={resumeCheckout.onResume}>
-            {resumeCheckout.label}
-          </button>
+          <div className="inventory-checkout-resume-actions">
+            <button type="button" onClick={resumeCheckout.onResume}>
+              {resumeCheckout.label}
+            </button>
+            {resumeCheckout.onStartOver && (
+              <button
+                type="button"
+                className="inventory-checkout-resume-reset"
+                onClick={resumeCheckout.onStartOver}
+              >
+                BUY ANOTHER TICKET →
+              </button>
+            )}
+          </div>
         </div>
       )}
 
@@ -2760,9 +2772,13 @@ function InventoryRuntimeApp({
                                 "review_required",
                               ].includes(checkoutSnapshot.stage)
                             ? "recoverable"
-                            : "checkout",
+                      : "checkout",
                     )
                   },
+                  onStartOver:
+                    checkoutSnapshot.stage === "fulfilled"
+                      ? startFreshDemo
+                      : undefined,
                 }
               : undefined
           }

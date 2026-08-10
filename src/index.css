@@ -212,6 +212,22 @@ button { font-family: inherit; }
   font-family: "JetBrains Mono", monospace;
 }
 
+.inventory-checkout-resume-actions {
+  display: flex;
+  align-items: stretch;
+  gap: 8px;
+  flex: 0 0 auto;
+}
+
+.inventory-checkout-resume .inventory-checkout-resume-reset {
+  background: #fff;
+  color: #006df9;
+}
+
+.inventory-checkout-resume .inventory-checkout-resume-reset:hover {
+  background: rgba(0, 109, 249, 0.06);
+}
+
 .inventory-checkout-resume span {
   color: #006df9;
   font-size: 8px;
@@ -1546,6 +1562,11 @@ button.payment-trace-node { cursor: pointer; }
 
   .inventory-checkout-resume button {
     width: 100%;
+  }
+
+  .inventory-checkout-resume-actions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .onsale-breadcrumb {
