@@ -580,7 +580,7 @@ test("fulfilled checkout renders a four-item buyer ticket wallet without enginee
     .toBe(1)
   await expect(
     page.getByRole("link", {
-      name: "OPEN FLOWS",
+      name: "OPEN THIS RECORDED PAYMENT",
       exact: true,
     }),
   ).toHaveAttribute("href", "/flows")

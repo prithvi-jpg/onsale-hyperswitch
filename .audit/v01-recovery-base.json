@@ -372,6 +372,23 @@
         "artifactSha256": "sha256:b74d9ff38236578a4ec9b9c9c582d74151b0fd395366a2ec8a8a0da8cb018587",
         "claimBoundary": "This proves both sale-entry controls remain on the event surface for a fulfilled order. The existing reset request, session rotation, payment, and ticket issuance logic are unchanged."
       }
+    },
+    {
+      "changeSetId": "v01-ticket-wallet-recorded-payment-copy",
+      "path": "src/App.tsx",
+      "contract": "Keep the stable /flows destination while naming the fulfilled-order action by the recorded payment the reviewer expects to inspect.",
+      "beforeSha256": "sha256:4c2d4c4f43f158c8c70529eca585d1f598d094eeee7f2ef314e01ec3a6599503",
+      "afterSha256": "sha256:36f318884f0880c22a5e45b6aa6809a7c4b9196c50bcf844607186aab8804582",
+      "reason": "Open Flows described the destination but not the reviewer job. The requested label restores the payment-specific meaning without restoring the fragile run query.",
+      "approvalReference": "user:ticket-wallet-recorded-payment-copy:2026-08-10",
+      "proofIds": ["eval-v01-recovery:ticket_wallet_recorded_payment_copy"],
+      "proof": {
+        "status": "passed",
+        "population": "focused_component_browser",
+        "artifact": "tests/e2e/onsale-checkout-c3.spec.ts",
+        "artifactSha256": "sha256:5fa737a6fe128224d3cd5306ffd0d5b538d592ba8ad252e8b03818b252e6157c",
+        "claimBoundary": "The label and /flows href are covered. Recorded-run selection and ledger contents are unchanged."
+      }
     }
   ]
 }

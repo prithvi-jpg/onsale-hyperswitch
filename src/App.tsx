@@ -2035,7 +2035,7 @@ function ProductionTicketWallet({
         >
           PRINT / SAVE SUMMARY
         </button>
-        <a href="/flows">OPEN FLOWS</a>
+        <a href="/flows">OPEN THIS RECORDED PAYMENT</a>
       </div>
     </div>
   )
