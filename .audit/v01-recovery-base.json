@@ -220,6 +220,44 @@
         "artifactSha256": "sha256:81ac12ab75710d9c186d1c4496a2ebb21317174e4bfe8c2cfba073d5113c862e",
         "claimBoundary": "The receipt proves current desktop containment and zero browser errors. Named-human comprehension and accessibility remain blocked."
       }
+    },
+    {
+      "changeSetId": "v01-flows-loading-first-paint",
+      "path": "app/flows/FlowsGallery.tsx",
+      "contract": "Render the retained-run skeleton on the first paint instead of flashing an unavailable-ledger error before the owned read starts.",
+      "beforeSha256": "sha256:14cbd7080054b72f041cf0329d61bd43a9344e4c54b989e70da95d68fba555ea",
+      "afterSha256": "sha256:730d4688cb84b7341eee7118e92014390ff407e40cb521ee4d9a974bc25f0a47",
+      "reason": "The user observed a retry and no-selection error flashing before the useful skeleton. A typed loading seed now owns the first render; real request failures still retain their recovery action.",
+      "approvalReference": "user:final-polish-loading-state:2026-08-09",
+      "proofIds": [
+        "eval-v01-recovery:flows_initial_loading_state"
+      ],
+      "proof": {
+        "status": "passed",
+        "population": "focused_component_contract",
+        "artifact": "tests/domain/flows-v2.test.tsx",
+        "artifactSha256": null,
+        "claimBoundary": "This proves the initial rendered markup. The combined named-runtime browser gate remains the final visual authority."
+      }
+    },
+    {
+      "changeSetId": "v01-flows-loading-first-paint-style",
+      "path": "app/flows/flows.module.css",
+      "contract": "Keep the existing quiet ledger skeleton while adding one neutral line that explains the retained evidence wait.",
+      "beforeSha256": "sha256:5c5ffbeba3cd6854ac4064ccb2e767b4d9c354b98b5c1564aa5728fb3bfbc946",
+      "afterSha256": "sha256:358e6f940840815fc37e09775457fc8a7370ee35934ff1d4efd01b5d9cb53d85",
+      "reason": "The loading state now says Loading runs and Awaiting retained payment evidence without adding a card, spinner, or alternate visual language.",
+      "approvalReference": "user:final-polish-loading-state:2026-08-09",
+      "proofIds": [
+        "eval-v01-recovery:flows_initial_loading_state"
+      ],
+      "proof": {
+        "status": "passed",
+        "population": "focused_component_contract",
+        "artifact": "tests/domain/flows-v2.test.tsx",
+        "artifactSha256": null,
+        "claimBoundary": "This is a narrow loading-state style proof; responsive visual proof is rerun on the combined candidate."
+      }
     }
   ]
 }

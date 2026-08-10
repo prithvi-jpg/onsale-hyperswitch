@@ -1500,12 +1500,25 @@
 }
 
 .ops-run-skeletons > span {
-  display: block;
+  display: grid;
+  gap: 4px;
   padding: 12px 15px;
   border-bottom: 1px solid var(--onsale-line);
   color: #56657a;
   font-family: var(--onsale-mono);
   font-size: 10px;
+}
+
+.ops-run-skeletons > span strong {
+  color: #26364c;
+  font-size: 11px;
+  font-weight: 650;
+}
+
+.ops-run-skeletons > span small {
+  color: #748195;
+  font-size: 9px;
+  line-height: 1.45;
 }
 
 .ops-run-skeletons > div {

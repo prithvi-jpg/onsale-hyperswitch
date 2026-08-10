@@ -78,6 +78,17 @@ export function mergeCompletedRunV1(
 export function recordedRunsStateFromSeedV1(
   seed: RecordedRunsSeedV1,
 ): RecordedRunsStateV1 {
+  if (seed.kind === "loading") {
+    return {
+      status: "loading",
+      items: [],
+      nextCursor: null,
+      selected: null,
+      pendingRunRef: null,
+      loadingMore: false,
+      message: null,
+    }
+  }
   if (seed.kind === "ready") {
     const summary = seed.page.items.find(
       (item) => item.runRef === seed.trace.runRef,

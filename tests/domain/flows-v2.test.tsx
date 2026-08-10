@@ -457,6 +457,12 @@ describe("ONSALE recorded flow replay", () => {
     expect(serialized).not.toMatch(/\b\d{13,19}\b/)
 
     const markup = renderToStaticMarkup(<FlowsGallery />)
+    expect(markup).toContain("Loading runs")
+    expect(markup).toContain("Awaiting retained payment evidence")
+    expect(markup).toContain('data-testid="flows-run-skeleton"')
+    expect(markup).not.toContain("The recorded ledger has not been loaded")
+    expect(markup).not.toContain("RETRY DURABLE LEDGER")
+    expect(markup).not.toContain("No retained run is selected")
     expect(markup).not.toMatch(/<form|type="submit"|method="post"/i)
   })
 })

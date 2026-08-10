@@ -54,6 +54,7 @@ export interface RecordedRunsFetchV1 {
 }
 
 export type RecordedRunsSeedV1 =
+  | { readonly kind: "loading" }
   | {
       readonly kind: "ready"
       readonly page: RecordedRunsPageV1

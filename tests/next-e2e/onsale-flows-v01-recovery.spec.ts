@@ -216,9 +216,18 @@ test("Recorded Runs uses a quiet skeleton while the durable read is pending", as
   await page.goto("/flows")
   await expect(page.getByTestId("flows-run-skeleton")).toHaveCount(3)
   await expect(page.getByTestId("flows-ledger")).toContainText("Loading runs")
+  await expect(page.getByTestId("flows-ledger")).toContainText(
+    "Awaiting retained payment evidence",
+  )
   await expect(page.getByTestId("flows-ledger")).not.toContainText(
     "Loading durable runs",
   )
+  await expect(page.getByTestId("flows-ledger")).not.toContainText(
+    "The recorded ledger has not been loaded",
+  )
+  await expect(
+    page.getByRole("button", { name: "RETRY DURABLE LEDGER" }),
+  ).toHaveCount(0)
   releaseList?.()
   await expect(page.getByTestId("flows-ledger")).toContainText(RUN_OLDER)
 })

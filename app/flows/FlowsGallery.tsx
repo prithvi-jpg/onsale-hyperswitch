@@ -109,10 +109,8 @@ const scenarioGuide: Record<string, {
 
 type WorkspaceView = "runs" | "stories"
 
-const UNAVAILABLE_RECORDED_RUNS_SEED_V1: RecordedRunsSeedV1 = {
-  kind: "unavailable",
-  message:
-    "The recorded ledger has not been loaded. No simulation has been substituted.",
+const LOADING_RECORDED_RUNS_SEED_V1: RecordedRunsSeedV1 = {
+  kind: "loading",
 }
 
 export const REDUCED_MOTION_REPLAY_ARRIVAL_DWELL_MS_V1 = 700
@@ -323,7 +321,7 @@ function AttemptChain({
 }
 
 export default function FlowsGallery({
-  initialSeed = UNAVAILABLE_RECORDED_RUNS_SEED_V1,
+  initialSeed = LOADING_RECORDED_RUNS_SEED_V1,
   requestedRun = null,
 }: {
   readonly initialSeed?: RecordedRunsSeedV1
@@ -774,7 +772,10 @@ export default function FlowsGallery({
               requestedRunRef === null &&
               recordedRuns.state.status === "loading" && (
               <div className={styles["ops-run-skeletons"]} role="status">
-                <span>Loading runs</span>
+                <span>
+                  <strong>Loading runs</strong>
+                  <small>Awaiting retained payment evidence</small>
+                </span>
                 {[0, 1, 2].map((index) => (
                   <div
                     aria-hidden="true"
