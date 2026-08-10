@@ -548,8 +548,8 @@ body:has(#orca-fullscreen) {
   position: fixed !important;
   inset: 0 auto auto 50% !important;
   display: block !important;
-  width: min(1800px, 150dvw) !important;
-  min-width: 100dvw !important;
+  width: max(2100px, 100dvw) !important;
+  min-width: max(2100px, 100dvw) !important;
   max-width: none !important;
   height: 100dvh !important;
   min-height: 100dvh !important;

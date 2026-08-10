@@ -532,7 +532,7 @@ test("official provider overlay is viewport-sized and cannot stretch the documen
   await expect(wrapper).toHaveCSS("height", "0px")
   await expect(frame).toHaveCSS("position", "fixed")
   expect((await frame.boundingBox())?.height).toBe(viewport.height)
-  expect((await frame.boundingBox())?.width).toBeGreaterThan(viewport.width)
+  expect((await frame.boundingBox())?.width).toBeGreaterThanOrEqual(2100)
   await expect(page.locator("body")).toHaveCSS("overflow", "hidden")
   expect(
     await page.evaluate(() => document.documentElement.scrollHeight),

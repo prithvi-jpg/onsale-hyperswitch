@@ -474,6 +474,23 @@
         "artifactSha256": "sha256:0084c49f5a73e9e31e4279249d711183b4a171a7519f6f974a6cbcd770d9062a",
         "claimBoundary": "Checkout-ready and review-required Home banners expose Buy Another Ticket. The reset endpoint and payment, fulfillment, and ticket issuance logic are unchanged."
       }
+    },
+    {
+      "changeSetId": "v01-provider-overlay-wide-css-viewport",
+      "path": "src/index.css",
+      "contract": "Give the official Hyperswitch iframe a wide CSS viewport so its own responsive Klarna and Affirm modal clears the narrow percentage-width breakpoint.",
+      "beforeSha256": "sha256:4a5978a9eda41c15565940e5e31101d3c80cbda0587aca6c2aee6fc554b04099",
+      "afterSha256": "sha256:5e271aaf7daa3a2c1552bded0c385d784585d52ea59bce5711ec50deef8f274b",
+      "reason": "The provider-owned modal uses responsive percentage widths inside a cross-origin iframe. At the previous 1800 pixel cap its 2xl width remained about 486 pixels. A centered 2100 pixel CSS viewport yields at least 567 pixels for that provider breakpoint while ONSALE continues to isolate the iframe from document flow.",
+      "approvalReference": "user:klarna-affirm-modal-clipping-final-pass:2026-08-10",
+      "proofIds": ["eval-v01-recovery:provider_overlay_wide_css_viewport"],
+      "proof": {
+        "status": "passed",
+        "population": "focused_component_browser",
+        "artifact": "tests/e2e/onsale-checkout-c3.spec.ts",
+        "artifactSha256": "sha256:53e834035d13a2a61efa7b40a91adefd2521e58769d9ac704689a2b0157b49cb",
+        "claimBoundary": "The merchant page proves a 2100 pixel official iframe viewport, full dynamic height, fixed flow isolation, and zero root overflow. The provider's cross-origin Tailwind markup cannot be rewritten by ONSALE and a real provider completion remains separate proof."
+      }
     }
   ]
 }
