@@ -238,7 +238,7 @@ test("Story Lab restores six business cases and keeps the method-versus-connecto
   const older = retainedRun(RUN_OLDER, "1")
   await installRecordedRuns(page, older, older)
   await page.goto("/flows")
-  await page.getByRole("button", { name: /STORY LAB Curated demos/iu }).click()
+  await page.getByRole("button", { name: /STORY LAB Six payment decisions/iu }).click()
 
   for (const id of [
     "confirmed-payment",
@@ -252,7 +252,11 @@ test("Story Lab restores six business cases and keeps the method-versus-connecto
   }
 
   await page.getByTestId("flow-option-fixture-label-counterexample").click()
-  await expect(page.getByRole("heading", { name: "Method versus connector lab" })).toBeVisible()
+  await expect(
+    page.getByRole("heading", {
+      name: "One card method can use two connectors without double charging",
+    }),
+  ).toBeVisible()
   await expect(page.getByTestId("flows-replay")).toContainText("THE PROBLEM")
   await expect(page.getByTestId("flows-replay")).toContainText("HYPERSWITCH ROLE")
   await expect(page.getByTestId("flows-replay")).toContainText("WHY IT MATTERS")

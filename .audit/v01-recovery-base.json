@@ -258,6 +258,44 @@
         "artifactSha256": null,
         "claimBoundary": "This is a narrow loading-state style proof; responsive visual proof is rerun on the combined candidate."
       }
+    },
+    {
+      "changeSetId": "v01-story-lab-outcome-led-titles",
+      "path": "app/flows/replay.ts",
+      "contract": "Keep the accepted six Story Lab subjects while naming each by the payment decision and consequence it teaches.",
+      "beforeSha256": "sha256:8ade0ba7e82cca534cd18622278cbd5816a8f0cdab2c1d53e9f7ef89f420e7ae",
+      "afterSha256": "sha256:4333e8acde6f82dd1aee321d6e3b3fb15f6e7a38a81c432368d4e7b2b3424e88",
+      "reason": "Internal labels such as Confirmed payment and Method versus connector lab did not tell a reviewer why the story exists. The six IDs, proof classes, evidence, steps, and replay behavior remain unchanged.",
+      "approvalReference": "user:final-polish-story-lab-writing:2026-08-09",
+      "proofIds": [
+        "eval-v01-recovery:story_lab_outcome_led_titles"
+      ],
+      "proof": {
+        "status": "passed",
+        "population": "focused_component_contract",
+        "artifact": "tests/domain/flows-v2.test.tsx",
+        "artifactSha256": null,
+        "claimBoundary": "This proves the exact six labels and unchanged deterministic catalog; final visual wrapping is checked on the combined browser candidate."
+      }
+    },
+    {
+      "changeSetId": "v01-story-lab-purpose-navigation",
+      "path": "app/flows/FlowsGallery.tsx",
+      "contract": "Explain that Story Lab contains six payment decisions and that each selected state is present because its business consequence matters.",
+      "beforeSha256": "sha256:730d4688cb84b7341eee7118e92014390ff407e40cb521ee4d9a974bc25f0a47",
+      "afterSha256": "sha256:a001884ef525516ef21340ca7edf48ed7d49ecc3d556c63569d436fc45e05df6",
+      "reason": "Replace generic Curated demos metadata with the reader job without changing workbench structure or replay controls.",
+      "approvalReference": "user:final-polish-story-lab-writing:2026-08-09",
+      "proofIds": [
+        "eval-v01-recovery:story_lab_outcome_led_titles"
+      ],
+      "proof": {
+        "status": "passed",
+        "population": "focused_component_contract",
+        "artifact": "tests/domain/flows-v2.test.tsx",
+        "artifactSha256": null,
+        "claimBoundary": "This is a content-hierarchy change only; browser proof owns final legibility."
+      }
     }
   ]
 }

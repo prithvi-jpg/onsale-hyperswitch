@@ -678,7 +678,7 @@ export default function FlowsGallery({
               type="button"
             >
               <strong>STORY LAB</strong>
-              <small>Curated demos</small>
+              <small>Six payment decisions</small>
             </button>
           </div>
         </section>
@@ -731,7 +731,7 @@ export default function FlowsGallery({
               <small>
                 {view === "runs"
                   ? "SELECT TO INSPECT · REPLAY IS SEPARATE"
-                  : "6 STORIES · 1 LOCAL SIMULATION"}
+                  : "WHY EACH PAYMENT STATE MATTERS"}
               </small>
             </header>
             <div className={styles["ops-ledger-list"]}>

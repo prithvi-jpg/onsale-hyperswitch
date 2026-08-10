@@ -174,6 +174,17 @@ describe("ONSALE recorded flow replay", () => {
     }
   })
 
+  it("names every Story Lab case by the payment decision it teaches", () => {
+    expect(storyLabFlowCatalog.map((flow) => flow.label)).toEqual([
+      "One verified payment safely unlocks one ticket",
+      "Klarna approval pauses checkout without losing the order",
+      "A hard decline stops before a second charge",
+      "A lost response is retrieved, not retried",
+      "One card method can use two connectors without double charging",
+      "Checkout blocks safely when no payment method is eligible",
+    ])
+  })
+
   it("isolates one deterministic multi-attempt simulation inside Story Lab", () => {
     expect(storyLabFlowCatalog.map((flow) => flow.id)).toEqual([
       "confirmed-payment",

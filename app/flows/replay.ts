@@ -132,7 +132,7 @@ const LIVE_RECOVERY_SUPPLEMENT =
 export const replayFlowCatalog = [
   {
     id: "confirmed-payment",
-    label: "Confirmed payment",
+    label: "One verified payment safely unlocks one ticket",
     kicker: "ONE PAYMENT · ONE CHARGED ATTEMPT",
     matrixCaseIds: ["HS-01", "HS-02"],
     proof: "live_sandbox_recorded",
@@ -243,7 +243,7 @@ export const replayFlowCatalog = [
   },
   {
     id: "action-required",
-    label: "Action required",
+    label: "Klarna approval pauses checkout without losing the order",
     kicker: "3DS STARTED · COMPLETION UNPROVEN",
     matrixCaseIds: ["HS-10", "HS-11", "HS-12", "HS-13"],
     proof: "live_sandbox_recorded",
@@ -330,7 +330,7 @@ export const replayFlowCatalog = [
   },
   {
     id: "terminal-decline",
-    label: "Terminal decline",
+    label: "A hard decline stops before a second charge",
     kicker: "FAILED · NO BLIND CASCADE",
     matrixCaseIds: ["HS-03", "HS-05", "HS-06"],
     proof: "live_sandbox_recorded",
@@ -416,7 +416,7 @@ export const replayFlowCatalog = [
   },
   {
     id: "lost-response-recovery",
-    label: "Lost response recovery",
+    label: "A lost response is retrieved, not retried",
     kicker: "UNKNOWN TRANSPORT · RETRIEVE SAME PAYMENT",
     matrixCaseIds: ["HS-16"],
     proof: "live_sandbox_recorded",
@@ -581,7 +581,7 @@ export const replayFlowCatalog = [
   },
   {
     id: "checkout-configuration-boundary",
-    label: "Checkout configuration boundary",
+    label: "Checkout blocks safely when no payment method is eligible",
     kicker: "NO ELIGIBLE METHODS · NO FAKE CHECKOUT",
     matrixCaseIds: ["HS-20"],
     proof: "configuration_block",
@@ -1006,7 +1006,7 @@ export const primaryReplayFlowIds = [
 const methodConnectorSimulation = {
   ...multiAttemptSimulation,
   id: "fixture-label-counterexample",
-  label: "Method versus connector lab",
+  label: "One card method can use two connectors without double charging",
   kicker: "LOCAL SIMULATION · CARD METHOD · TWO CONNECTORS · ONE CHARGE",
   problem:
     "A buyer-selected method and a routed connector are different facts. Collapsing them hides which attempt failed, which connector succeeded, and whether a second charge occurred.",
