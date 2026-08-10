@@ -469,6 +469,9 @@ test("ONSALE home returns to the event without discarding the current checkout",
   await expect(page.getByTestId("inventory-checkout-resume")).toContainText(
     "YOUR ORDER IS SAVED",
   )
+  await expect(
+    page.getByRole("button", { name: "BUY ANOTHER TICKET →" }),
+  ).toBeVisible()
 
   await resume.click()
   await expect(
@@ -741,6 +744,9 @@ test("review-required checkout keeps the same payment recoverable without a stal
     name: "RESUME SECURE CHECKOUT →",
   })
   await expect(resume).toBeVisible()
+  await expect(
+    page.getByRole("button", { name: "BUY ANOTHER TICKET →" }),
+  ).toBeVisible()
   await resume.click()
   await expect(
     page.getByRole("heading", { name: "We need to review this order." }),

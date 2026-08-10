@@ -457,6 +457,23 @@
         "artifactSha256": "sha256:2cb766199f47d2e56e177c930dc022bc67d235a2b88a8eaeb3650c9492a65a41",
         "claimBoundary": "The exact 1538 by 746 regression proves the shell is fixed at y=0, fills the viewport, and the provider overlay remains document-flow isolated. Payment, session, ticket, and Flows behavior are unchanged."
       }
+    },
+    {
+      "changeSetId": "v01-saved-order-reset-all-stages",
+      "path": "src/App.tsx",
+      "contract": "Expose the existing Buy Another Ticket reset action on Home for every saved checkout stage, not only fulfilled tickets.",
+      "beforeSha256": "sha256:5678b645bce216d46a15768988813eb18a0885a18acc6f62021e8723def5108e",
+      "afterSha256": "sha256:0cfc75b5fc4e69d0dc45b28729806cd349109425a69f603901a94ca255c44f03",
+      "reason": "Checkout-ready and failure states could return Home with only Resume available, trapping a reviewer in the saved order. The banner now invokes the same guarded reset operation for all saved stages.",
+      "approvalReference": "user:saved-checkout-failure-reset-cta:2026-08-10",
+      "proofIds": ["eval-v01-recovery:saved_order_reset_all_stages"],
+      "proof": {
+        "status": "passed",
+        "population": "focused_component_browser",
+        "artifact": "tests/e2e/onsale-checkout-c3.spec.ts",
+        "artifactSha256": "sha256:0084c49f5a73e9e31e4279249d711183b4a171a7519f6f974a6cbcd770d9062a",
+        "claimBoundary": "Checkout-ready and review-required Home banners expose Buy Another Ticket. The reset endpoint and payment, fulfillment, and ticket issuance logic are unchanged."
+      }
     }
   ]
 }

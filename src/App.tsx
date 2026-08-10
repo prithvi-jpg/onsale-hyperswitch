@@ -2775,10 +2775,7 @@ function InventoryRuntimeApp({
                       : "checkout",
                     )
                   },
-                  onStartOver:
-                    checkoutSnapshot.stage === "fulfilled"
-                      ? startFreshDemo
-                      : undefined,
+                  onStartOver: startFreshDemo,
                 }
               : undefined
           }
