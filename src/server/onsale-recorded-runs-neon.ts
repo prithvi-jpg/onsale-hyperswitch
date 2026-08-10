@@ -592,7 +592,7 @@ function requestAuthority(request: Request): {
   const configured = parseConfiguredOriginsV1(source === undefined ? [ONSALE_LOCAL_PREVIEW_ORIGIN_V1] : source.split(","))
   if (configured.size !== 1) throw new OnsaleHttpGuardError("request_origin_denied")
   const localOrigin = [...configured][0]
-  if (!localOrigin || classifyOnsaleLocalOriginV1(localOrigin) === null) {
+  if (!localOrigin) {
     throw new OnsaleHttpGuardError("request_origin_denied")
   }
   const suppliedOrigin = request.headers.get("origin")
@@ -602,14 +602,30 @@ function requestAuthority(request: Request): {
   const session = resolveExistingAnonymousSessionV1(cookieValue(request, ONSALE_SESSION_COOKIE_NAME_V1))
   const sessionBuyerRef = session?.session.buyerRef() ?? null
   const scope = process.env[ONSALE_RECORDED_RUN_SCOPE_ENV_V1]?.trim()
-  if (scope !== undefined && scope !== "" && scope !== "local_review") {
+  if (
+    scope !== undefined &&
+    scope !== "" &&
+    scope !== "local_review" &&
+    scope !== "public_sandbox"
+  ) {
     throw new OnsaleHttpGuardError("request_origin_denied")
   }
-  if (scope !== "local_review" && sessionBuyerRef === null) {
+  const localReview = scope === "local_review"
+  const publicSandbox = scope === "public_sandbox"
+  const originIsLocal = classifyOnsaleLocalOriginV1(localOrigin) !== null
+  const originIsHostedHttps = new URL(localOrigin).protocol === "https:"
+  if (
+    (localReview && !originIsLocal) ||
+    (publicSandbox && !originIsHostedHttps) ||
+    (!localReview && !publicSandbox && !originIsLocal)
+  ) {
+    throw new OnsaleHttpGuardError("request_origin_denied")
+  }
+  if (!localReview && !publicSandbox && sessionBuyerRef === null) {
     throw new OnsaleHttpGuardError("request_origin_denied")
   }
   return {
-    ledgerBuyerRef: scope === "local_review" ? null : sessionBuyerRef,
+    ledgerBuyerRef: localReview || publicSandbox ? null : sessionBuyerRef,
     sessionBuyerRef,
     localOrigin,
   }
