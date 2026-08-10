@@ -507,6 +507,10 @@ test("fulfilled checkout renders a four-item buyer ticket wallet without enginee
   })
   await expect(terminalHeading).toBeFocused()
   await expect(terminalHeading).toHaveCSS("outline-style", "none")
+  const flowsLink = page.getByRole("link", { name: "FLOWS" })
+  await expect(flowsLink).toHaveCSS("background-color", "rgb(0, 109, 249)")
+  await expect(flowsLink).toHaveCSS("color", "rgb(255, 255, 255)")
+  expect((await flowsLink.boundingBox())?.height).toBeGreaterThanOrEqual(32)
   await expect(
     page.getByText("4 tickets confirmed for PHANTOM CIRCUIT."),
   ).toBeVisible()

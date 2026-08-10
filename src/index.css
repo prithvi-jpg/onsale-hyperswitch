@@ -158,20 +158,28 @@ button { font-family: inherit; }
 }
 
 .onsale-flows-tab {
-  color: #006df9;
+  display: inline-flex;
+  min-height: 32px;
+  align-items: center;
+  justify-content: center;
+  padding: 0 12px;
+  border: 1px solid #006df9;
+  background: #006df9;
+  color: #fff;
   font-family: "JetBrains Mono", monospace;
-  font-size: 8px;
-  font-weight: 600;
-  letter-spacing: 0.12em;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
   text-decoration: none;
-  text-underline-offset: 3px;
-  transition: color 150ms ease, text-decoration-color 150ms ease;
+  transition: background 150ms ease, border-color 150ms ease;
 }
 
 .onsale-flows-tab:hover,
 .onsale-flows-tab:focus-visible {
-  color: #0058d0;
-  text-decoration: underline;
+  border-color: #0058d0;
+  background: #0058d0;
+  color: #fff;
+  text-decoration: none;
 }
 
 .onsale-environment-badges {
