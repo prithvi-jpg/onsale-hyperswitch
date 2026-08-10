@@ -1,3 +1,5 @@
+import { readFileSync } from "node:fs"
+
 import { renderToStaticMarkup } from "react-dom/server"
 import { describe, expect, it, vi } from "vitest"
 
@@ -63,5 +65,17 @@ describe("C3 official Hyperswitch client boundary", () => {
     expect(html).toContain("Klarna and Affirm test flows work here too")
     expect(html).toContain("Returned server state remains authoritative")
     expect(html).not.toContain("<input")
+  })
+
+  it("uses the official appearance variables to soften the billing details container", () => {
+    const source = readFileSync(
+      new URL("../../src/HyperswitchCheckoutClient.tsx", import.meta.url),
+      "utf8",
+    )
+
+    expect(source).toContain('borderColor: "rgba(0,109,249,0.24)"')
+    expect(source).toContain('borderRadius: "8px"')
+    expect(source).toContain('spacingGridRow: "16px"')
+    expect(source).toContain('spacingGridColumn: "16px"')
   })
 })
