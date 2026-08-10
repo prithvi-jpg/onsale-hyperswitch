@@ -479,6 +479,22 @@ test("ONSALE home returns to the event without discarding the current checkout",
   )
 })
 
+test("official provider overlay can escape the checkout card and cover the viewport", async ({
+  page,
+}) => {
+  await installCheckoutReady(page)
+  await page.goto("/")
+
+  const checkoutScreen = page.locator(".production-checkout-screen")
+  const provider = page.locator(".production-checkout-provider")
+  await expect(provider).toBeVisible()
+  await page.waitForTimeout(450)
+
+  await expect(checkoutScreen).toHaveCSS("transform", "none")
+  await expect(provider).toHaveCSS("overflow-x", "visible")
+  await expect(provider).toHaveCSS("overflow-y", "visible")
+})
+
 test("fulfilled checkout renders a four-item buyer ticket wallet without engineering payment facts", async ({
   page,
 }) => {

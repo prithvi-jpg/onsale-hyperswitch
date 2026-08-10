@@ -296,6 +296,25 @@
         "artifactSha256": null,
         "claimBoundary": "This is a content-hierarchy change only; browser proof owns final legibility."
       }
+    },
+    {
+      "changeSetId": "v01-official-provider-overlay-containment",
+      "path": "src/index.css",
+      "contract": "Let the official Hyperswitch fullscreen iframe escape the checkout card and cover the ONSALE viewport without changing provider action logic.",
+      "beforeSha256": "sha256:70b5537217166fa9affce060f34efa84deaf56c26218272fd4fc5cb731a26b9d",
+      "afterSha256": "sha256:f83df4f3704e52cd8afd1af1efe45fe68b97533965d3de248329f11714fa63b2",
+      "reason": "The completed entrance animation retained an identity transform and the checkout card hid overflow, creating a containing and clipping block for Hyperswitch's position-fixed fullscreen iframe. Backwards fill preserves the entrance but releases the transform; only the provider card permits overflow.",
+      "approvalReference": "user:final-polish-provider-overlay:2026-08-09",
+      "proofIds": [
+        "eval-v01-recovery:official_provider_overlay_containment"
+      ],
+      "proof": {
+        "status": "passed",
+        "population": "focused_component_browser",
+        "artifact": "tests/e2e/onsale-checkout-c3.spec.ts",
+        "artifactSha256": "sha256:4bd407c5ce0fb0100b0cf4170428ef819af9b14e8cc158523fc840b28c7f7eb1",
+        "claimBoundary": "This proves ONSALE no longer clips a fullscreen iframe. The provider-owned inner card and approval controls remain cross-origin and are not restyled or simulated."
+      }
     }
   ]
 }

@@ -248,7 +248,7 @@ button { font-family: inherit; }
   width: 100%;
   min-width: 0;
   padding: 28px 40px 44px;
-  animation: slide-up 400ms ease both;
+  animation: slide-up 400ms ease backwards;
 }
 
 .production-checkout-status {
@@ -313,9 +313,16 @@ button { font-family: inherit; }
 .production-checkout-provider,
 .production-order-card {
   min-width: 0;
-  overflow: hidden;
   border: 1px solid rgba(0, 109, 249, 0.2);
   background: #fff;
+}
+
+.production-checkout-provider {
+  overflow: visible;
+}
+
+.production-order-card {
+  overflow: hidden;
 }
 
 .production-checkout-provider-header,
