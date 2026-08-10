@@ -75,12 +75,14 @@ interface HeaderRow extends QueryResultRow {
 }
 
 interface OperationRow extends QueryResultRow {
+  payment_id?: string
   id: string
   command_kind: "ensure_checkout" | "reconcile_payment"
   created_at: string | Date
 }
 
 interface ObservationRow extends QueryResultRow {
+  payment_id?: string
   id: string
   public_ref: string
   source: "create_response" | "retrieve_response" | "verified_webhook"
@@ -88,6 +90,7 @@ interface ObservationRow extends QueryResultRow {
 }
 
 interface AttemptRow extends QueryResultRow {
+  payment_id?: string
   id: string
   canonical_state: string
   observed_connector: string | null
@@ -403,7 +406,12 @@ export class NeonRecordedRunsRepositoryV1 implements RecordedRunsRepositoryV1 {
     } finally { client.release() }
   }
 
-  async #load(client: QueryClient, buyerRef: string | null, paymentId: string): Promise<LoadedRunV1 | undefined> {
+  async #loadMany(
+    client: QueryClient,
+    buyerRef: string | null,
+    paymentIds: readonly string[],
+  ): Promise<ReadonlyMap<string, LoadedRunV1>> {
+    if (paymentIds.length === 0) return new Map()
     const buyerPredicate = buyerRef === null ? "" : "and o.buyer_ref = $2"
     const headerResult = await client.query<HeaderRow>(
       `select pp.id as payment_id, o.state as order_state,
@@ -431,38 +439,55 @@ export class NeonRecordedRunsRepositoryV1 implements RecordedRunsRepositoryV1 {
          where po.payment_id = pp.id
          order by po.received_at desc, po.id desc limit 1
        ) latest on true
-       where pp.id = $1 ${buyerPredicate}`,
-      buyerRef === null ? [paymentId] : [paymentId, buyerRef],
+       where pp.id = any($1::uuid[]) ${buyerPredicate}`,
+      buyerRef === null ? [paymentIds] : [paymentIds, buyerRef],
     )
-    const header = headerResult.rows[0]
-    if (!header) return undefined
     const [operationResult, observationResult, attemptResult] = await Promise.all([
       client.query<OperationRow>(
-        `select id, command_kind, created_at from ${this.#table("checkout_operation")} where payment_id = $1 order by created_at, id`,
-        [paymentId],
+        `select id, command_kind, created_at, payment_id from ${this.#table("checkout_operation")} where payment_id = any($1::uuid[]) order by payment_id, created_at, id`,
+        [paymentIds],
       ),
       client.query<ObservationRow>(
-        `select id, public_ref, source, received_at from ${this.#table("payment_observation")} where payment_id = $1 order by received_at, id`,
-        [paymentId],
+        `select id, public_ref, source, received_at, payment_id from ${this.#table("payment_observation")} where payment_id = any($1::uuid[]) order by payment_id, received_at, id`,
+        [paymentIds],
       ),
       client.query<AttemptRow>(
         `select distinct on (pa.id) pa.id, pa.canonical_state, pa.observed_connector,
                 pa.first_observed_at, pao.attempt_ordinal,
-                po.selected_payment_method, pao.error_kind
+                po.selected_payment_method, pao.error_kind, pa.payment_id
          from ${this.#table("payment_attempt")} pa
          left join ${this.#table("payment_attempt_observation")} pao on pao.payment_attempt_id = pa.id
          left join ${this.#table("payment_observation")} po on po.id = pao.payment_observation_id
-         where pa.payment_id = $1
+         where pa.payment_id = any($1::uuid[])
          order by pa.id, po.received_at desc nulls last`,
-        [paymentId],
+        [paymentIds],
       ),
     ])
-    return projectRecordedRunRowsV1({
-      header,
-      operations: operationResult.rows,
-      observations: observationResult.rows,
-      attempts: attemptResult.rows,
-    })
+    const owner = (row: { readonly payment_id?: string }): string | undefined =>
+      row.payment_id ?? (paymentIds.length === 1 ? paymentIds[0] : undefined)
+    const loaded = new Map<string, LoadedRunV1>()
+    for (const header of headerResult.rows) {
+      loaded.set(
+        header.payment_id,
+        projectRecordedRunRowsV1({
+          header,
+          operations: operationResult.rows.filter(
+            (row) => owner(row) === header.payment_id,
+          ),
+          observations: observationResult.rows.filter(
+            (row) => owner(row) === header.payment_id,
+          ),
+          attempts: attemptResult.rows.filter(
+            (row) => owner(row) === header.payment_id,
+          ),
+        }),
+      )
+    }
+    return loaded
+  }
+
+  async #load(client: QueryClient, buyerRef: string | null, paymentId: string): Promise<LoadedRunV1 | undefined> {
+    return (await this.#loadMany(client, buyerRef, [paymentId])).get(paymentId)
   }
 
   async get(buyerRef: string | null, runRef: RecordedRunRefV1): Promise<LoadedRunV1 | undefined> {
@@ -523,9 +548,16 @@ export class NeonRecordedRunsRepositoryV1 implements RecordedRunsRepositoryV1 {
       }
       const pageRows = selectors.rows.slice(cursorIndex + 1, cursorIndex + 1 + PAGE_LIMIT + 1)
       const visible = pageRows.slice(0, PAGE_LIMIT)
-      const loaded = await Promise.all(visible.map((row) => this.#load(client, buyerRef, row.payment_id)))
-      if (loaded.some((item) => item === undefined)) throw new RecordedRunsRepositoryErrorV1("RUN_INTEGRITY", "A retained run disappeared during a read snapshot")
-      const items = loaded.map((item) => summarizeRecordedRunV1(item!.trace, item!.recordedAt))
+      const loaded = await this.#loadMany(
+        client,
+        buyerRef,
+        visible.map((row) => row.payment_id),
+      )
+      if (loaded.size !== visible.length) throw new RecordedRunsRepositoryErrorV1("RUN_INTEGRITY", "A retained run disappeared during a read snapshot")
+      const items = visible.map((row) => {
+        const item = loaded.get(row.payment_id)!
+        return summarizeRecordedRunV1(item.trace, item.recordedAt)
+      })
       return {
         schema: "onsale.recorded-runs.v1",
         items,
