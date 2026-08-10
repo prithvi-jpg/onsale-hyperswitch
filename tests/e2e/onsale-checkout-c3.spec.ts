@@ -502,9 +502,11 @@ test("fulfilled checkout renders a four-item buyer ticket wallet without enginee
 
   await page.goto("/")
 
-  await expect(
-    page.getByRole("heading", { name: "Your tickets are ready." }),
-  ).toBeFocused()
+  const terminalHeading = page.getByRole("heading", {
+    name: "Your tickets are ready.",
+  })
+  await expect(terminalHeading).toBeFocused()
+  await expect(terminalHeading).toHaveCSS("outline-style", "none")
   await expect(
     page.getByText("4 tickets confirmed for PHANTOM CIRCUIT."),
   ).toBeVisible()

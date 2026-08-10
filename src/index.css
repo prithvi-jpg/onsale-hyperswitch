@@ -278,11 +278,6 @@ button { font-family: inherit; }
   outline: none;
 }
 
-.production-checkout-heading:focus {
-  outline: 2px solid #006df9;
-  outline-offset: 4px;
-}
-
 .production-checkout-heading.terminal {
   font-size: clamp(24px, 3.2vw, 40px);
   letter-spacing: -0.03em;
