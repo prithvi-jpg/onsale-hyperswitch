@@ -521,6 +521,39 @@ describe("ONSALE v0.1 durable Recorded Runs boundary", () => {
     })
   })
 
+  it("lists only sanitized public sandbox runs on the exact hosted HTTPS origin", async () => {
+    vi.stubEnv("ONSALE_ALLOWED_ORIGINS", "https://onsale.vercel.app")
+    vi.stubEnv("ONSALE_RECORDED_RUN_SCOPE", "public_sandbox")
+    let listScope: string | null | undefined
+    const repository: RecordedRunsRepositoryV1 = {
+      list: async (buyerRef) => {
+        listScope = buyerRef
+        return pageFor(retainedTrace("1"), "2026-08-09T12:01:00.000Z", null)
+      },
+      get: async () => undefined,
+      current: async () => undefined,
+      close: async () => undefined,
+    }
+    const request = (origin: string) =>
+      new Request("https://onsale.vercel.app/api/onsale/ops/runs", {
+        headers: { origin, "sec-fetch-site": "same-origin" },
+      })
+
+    const hosted = await handleRecordedRunsListGetV1(
+      request("https://onsale.vercel.app"),
+      repository,
+    )
+    const lookalike = await handleRecordedRunsListGetV1(
+      request("https://onsale.vercel.app.attacker.example"),
+      repository,
+    )
+
+    expect(hosted.status).toBe(200)
+    expect(listScope).toBeNull()
+    expect(lookalike.status).toBe(403)
+    expect((await lookalike.json()).error.code).toBe("REQUEST_ORIGIN_DENIED")
+  })
+
   it("rejects duplicate list parameters before repository access", async () => {
     let listed = false
     const repository: RecordedRunsRepositoryV1 = {
