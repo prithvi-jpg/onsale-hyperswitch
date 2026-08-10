@@ -25,6 +25,8 @@ import type { CheckoutWidgetReadinessV1 } from "./use-onsale-checkout"
 
 const OFFICIAL_RETURN_PATH = "/api/onsale/return"
 const OFFICIAL_CHECKOUT_LOAD_TIMEOUT_MS_V1 = 15_000
+const SANDBOX_SUCCESS_CARD_V1 = "4242424242424242"
+const SANDBOX_DECLINE_CARD_V1 = "4000000000000002"
 
 let officialHyperLoadV1: {
   readonly publishableKey: string
@@ -66,6 +68,65 @@ export interface HyperswitchCheckoutClientProps {
   readonly onReadiness: (value: CheckoutWidgetReadinessV1) => void
   readonly onConfirm: (confirm: () => Promise<unknown>) => Promise<boolean>
   readonly onRetry?: () => void
+}
+
+export function SandboxTestPaymentHelpersV1() {
+  const [copyStatus, setCopyStatus] = useState<string | null>(null)
+
+  const copyCard = useCallback(async (label: string, value: string) => {
+    try {
+      await navigator.clipboard.writeText(value)
+      setCopyStatus(`${label} copied. Paste it into the official card field.`)
+    } catch {
+      setCopyStatus("Clipboard access is unavailable. Select the card number instead.")
+    }
+  }, [])
+
+  return (
+    <section
+      aria-labelledby="sandbox-card-helper-title"
+      className="official-checkout-sandbox-helper"
+      data-testid="official-checkout-sandbox-helper"
+    >
+      <div className="official-checkout-sandbox-intro">
+        <strong id="sandbox-card-helper-title">Public sandbox cards</strong>
+        <span>Expiry 12/30 · CVC 100</span>
+      </div>
+      <div className="official-checkout-sandbox-cards">
+        <div>
+          <span>Successful card</span>
+          <code>4242 4242 4242 4242</code>
+          <button
+            onClick={() =>
+              void copyCard("Successful card", SANDBOX_SUCCESS_CARD_V1)
+            }
+            type="button"
+          >
+            COPY SUCCESS CARD
+          </button>
+        </div>
+        <div>
+          <span>Hard decline</span>
+          <code>4000 0000 0000 0002</code>
+          <button
+            onClick={() =>
+              void copyCard("Decline card", SANDBOX_DECLINE_CARD_V1)
+            }
+            type="button"
+          >
+            COPY DECLINE CARD
+          </button>
+        </div>
+      </div>
+      <p>
+        Public Hyperswitch sandbox fixtures only. Returned server state remains
+        authoritative.
+      </p>
+      <p aria-live="polite" className="official-checkout-copy-status">
+        {copyStatus}
+      </p>
+    </section>
+  )
 }
 
 function OfficialCheckoutFormV1({
@@ -120,6 +181,7 @@ function OfficialCheckoutFormV1({
 
   return (
     <form className="official-checkout-form" onSubmit={submit}>
+      <SandboxTestPaymentHelpersV1 />
       <div
         className="official-checkout-widget"
         data-testid="official-checkout-widget"

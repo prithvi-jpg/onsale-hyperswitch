@@ -4,6 +4,7 @@ import { describe, expect, it, vi } from "vitest"
 import type { Element as HyperElement, HyperInstance } from "@juspay-tech/hyper-js"
 
 import HyperswitchCheckoutClient, {
+  SandboxTestPaymentHelpersV1,
   confirmWithOfficialCheckoutV1,
 } from "../../src/HyperswitchCheckoutClient"
 
@@ -49,5 +50,17 @@ describe("C3 official Hyperswitch client boundary", () => {
     expect(html).not.toContain("pk_snd_publishable_canary")
     expect(html).not.toContain("SIMULATE")
     expect(html).not.toContain("CARD NUMBER")
+  })
+
+  it("keeps public sandbox fixtures above and outside the official payment fields", () => {
+    const html = renderToStaticMarkup(<SandboxTestPaymentHelpersV1 />)
+
+    expect(html).toContain("Public sandbox cards")
+    expect(html).toContain("4242 4242 4242 4242")
+    expect(html).toContain("4000 0000 0000 0002")
+    expect(html).toContain("COPY SUCCESS CARD")
+    expect(html).toContain("COPY DECLINE CARD")
+    expect(html).toContain("Returned server state remains authoritative")
+    expect(html).not.toContain("<input")
   })
 })

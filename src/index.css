@@ -403,12 +403,94 @@ button { font-family: inherit; }
   background: #f8faff;
 }
 
+.official-checkout-sandbox-helper {
+  margin-bottom: 14px;
+  padding: 14px;
+  border: 1px solid rgba(0, 109, 249, 0.2);
+  background: #fff;
+  color: #263244;
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.official-checkout-sandbox-intro,
+.official-checkout-sandbox-cards > div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.official-checkout-sandbox-intro {
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.official-checkout-sandbox-intro strong {
+  color: #0a0a0a;
+  font-size: 13px;
+}
+
+.official-checkout-sandbox-intro span,
+.official-checkout-sandbox-cards span,
+.official-checkout-sandbox-helper p {
+  color: #5f6b7a;
+}
+
+.official-checkout-sandbox-cards {
+  display: grid;
+  gap: 8px;
+}
+
+.official-checkout-sandbox-cards > div {
+  display: grid;
+  grid-template-columns: minmax(92px, 0.7fr) minmax(156px, 1fr) auto;
+  min-height: 44px;
+  padding-top: 8px;
+  border-top: 1px solid rgba(0, 109, 249, 0.12);
+}
+
+.official-checkout-sandbox-cards code {
+  color: #0a0a0a;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.official-checkout-sandbox-cards button {
+  min-height: 44px;
+  padding: 8px 10px;
+  border: 1px solid #006df9;
+  background: #fff;
+  color: #006df9;
+  cursor: pointer;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10px;
+}
+
+.official-checkout-sandbox-helper p {
+  margin: 9px 0 0;
+}
+
+.official-checkout-copy-status:empty {
+  display: none;
+}
+
 .official-checkout-widget {
   padding: 14px;
   overflow: hidden;
   border: 1px solid rgba(0, 109, 249, 0.14);
   border-radius: 10px;
   background: #eef4ff;
+}
+
+@media (max-width: 600px) {
+  .official-checkout-sandbox-cards > div {
+    grid-template-columns: 1fr auto;
+  }
+
+  .official-checkout-sandbox-cards span {
+    grid-column: 1 / -1;
+  }
 }
 
 .official-checkout-submit {
