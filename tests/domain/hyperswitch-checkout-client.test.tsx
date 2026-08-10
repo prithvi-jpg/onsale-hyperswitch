@@ -60,6 +60,7 @@ describe("C3 official Hyperswitch client boundary", () => {
     expect(html).toContain("4000 0000 0000 0002")
     expect(html).toContain("COPY SUCCESS CARD")
     expect(html).toContain("COPY DECLINE CARD")
+    expect(html).toContain("Klarna and Affirm test flows work here too")
     expect(html).toContain("Returned server state remains authoritative")
     expect(html).not.toContain("<input")
   })

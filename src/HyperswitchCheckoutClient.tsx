@@ -119,8 +119,8 @@ export function SandboxTestPaymentHelpersV1() {
         </div>
       </div>
       <p>
-        Public Hyperswitch sandbox fixtures only. Returned server state remains
-        authoritative.
+        Klarna and Affirm test flows work here too. Returned server state
+        remains authoritative.
       </p>
       <p aria-live="polite" className="official-checkout-copy-status">
         {copyStatus}
