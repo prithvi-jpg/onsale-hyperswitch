@@ -2179,27 +2179,16 @@ function ProductionCheckoutScreen({
               <div className="production-checkout-state-card">
                 <span>{presentation.kicker}</span>
                 <p>{presentation.body}</p>
-                <div className="production-checkout-state-actions">
-                  <button
-                    type="button"
-                    className="btn-outline-blue production-checkout-reconcile"
-                    onClick={onReconcile}
-                    disabled={requestState === "reconciling"}
-                  >
-                    {requestState === "reconciling"
-                      ? "CHECKING THIS PAYMENT…"
-                      : "CHECK SAME PAYMENT STATUS →"}
-                  </button>
-                  {snapshot.stage === "action_required" && (
-                    <button
-                      type="button"
-                      className="btn-outline-blue production-checkout-start-over"
-                      onClick={onStartOver}
-                    >
-                      BUY ANOTHER TICKET →
-                    </button>
-                  )}
-                </div>
+                <button
+                  type="button"
+                  className="btn-outline-blue production-checkout-reconcile"
+                  onClick={onReconcile}
+                  disabled={requestState === "reconciling"}
+                >
+                  {requestState === "reconciling"
+                    ? "CHECKING THIS PAYMENT…"
+                    : "CHECK SAME PAYMENT STATUS →"}
+                </button>
               </div>
             )}
           </div>

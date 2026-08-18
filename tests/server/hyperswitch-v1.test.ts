@@ -143,7 +143,7 @@ function safeSerializedError(error: unknown) {
 }
 
 describe("pinned server-only Hyperswitch V1 adapter", () => {
-  it("requests official SDK iframe handling for an exact configured HTTPS return endpoint", async () => {
+  it("requests official SDK iframe handling only for the exact named local return endpoint", async () => {
     for (const eligible of [
       "http://onsale-v01.localhost:4310/api/onsale/return",
       "https://onsale-v01.localhost/api/onsale/return",
@@ -165,15 +165,15 @@ describe("pinned server-only Hyperswitch V1 adapter", () => {
 
     const recorded = recordingFetch(async () => jsonResponse(createResponse()))
     const adapter = adapterWith(recorded.fetch, {
-      allowedReturnOrigins: ["https://onsaleapp.vercel.app"],
+      allowedReturnOrigins: ["https://onsale-v01.localhost"],
     })
     await adapter.createPayment({
       ...CREATE_INPUT,
-      returnUrl: "https://onsaleapp.vercel.app/api/onsale/return",
+      returnUrl: "https://onsale-v01.localhost/api/onsale/return",
     })
 
     expect(JSON.parse(String(recorded.calls[0]?.init?.body))).toMatchObject({
-      return_url: "https://onsaleapp.vercel.app/api/onsale/return",
+      return_url: "https://onsale-v01.localhost/api/onsale/return",
       is_iframe_redirection_enabled: true,
     })
   })
