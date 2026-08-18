@@ -182,6 +182,37 @@ function reviewRequiredCheckout(index: number) {
   }
 }
 
+function actionRequiredCheckout(index: number) {
+  const ready = readyCheckout(index)
+  return {
+    ...ready,
+    stage: "action_required",
+    payment: {
+      ...ready.payment,
+      canonicalState: "action_required",
+      integrityState: "clear",
+      observationSource: "retrieve",
+      selectedMethod: { family: "pay_later", type: "klarna" },
+      observedConnector: "stripe_test",
+      attempts: [
+        {
+          ordinal: 1,
+          state: "action_required",
+          charged: false,
+          hardDecline: false,
+          connector: "stripe_test",
+        },
+      ],
+      chargedAttemptCount: 0,
+      retryPermitted: false,
+      retryReason: "same_payment_status_check_only",
+      evidenceRevision: shaRevision(1_200 + index),
+    },
+    checkout: null,
+    message: "CUSTOMER ACTION REQUIRED",
+  }
+}
+
 const missingOrder = {
   schema: "onsale.checkout-private.v1",
   ok: false,
@@ -755,6 +786,41 @@ test("review-required checkout keeps the same payment recoverable without a stal
   await expect(page.locator(".production-ticket-wallet")).toHaveCount(0)
   await expect(page.getByTestId("official-checkout-submit")).toHaveCount(0)
   expect(terminal.providerRequests).toEqual([])
+})
+
+test("action-required checkout can return home and start a new session", async ({
+  page,
+}) => {
+  await installTerminalCheckout(page, actionRequiredCheckout)
+  let resetRequests = 0
+  await page.route("**/api/onsale/demo/reset", async (route) => {
+    resetRequests += 1
+    await route.fulfill({ status: 204, body: "" })
+  })
+  await page.goto("/")
+
+  await expect(
+    page.getByRole("heading", { name: "Complete the secure approval" }),
+  ).toBeVisible()
+  await page.getByRole("button", { name: "ONSALE home" }).click()
+
+  await expect(
+    page.getByRole("heading", { name: "PHANTOM CIRCUIT" }),
+  ).toBeVisible()
+  await expect(
+    page.getByRole("button", { name: "RESUME SECURE CHECKOUT →" }),
+  ).toBeVisible()
+  await expect(
+    page.getByRole("button", { name: "BUY ANOTHER TICKET →" }),
+  ).toBeVisible()
+
+  await page.getByRole("button", { name: "RESUME SECURE CHECKOUT →" }).click()
+  const startOver = page.getByRole("button", {
+    name: "BUY ANOTHER TICKET →",
+  })
+  await expect(startOver).toBeVisible()
+  await startOver.click()
+  await expect.poll(() => resetRequests).toBe(1)
 })
 
 test("Figma production entry prepares the held order and StrictMode keeps focus on Secure checkout", async ({

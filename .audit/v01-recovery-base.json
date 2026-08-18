@@ -508,6 +508,40 @@
         "artifactSha256": "sha256:2c9be9807065a91659f050ed39726b20f10dd7efeb912577cde617d60cc057bb",
         "claimBoundary": "The focused browser check proves a fixed viewport-sized official frame, hidden outer overflow, no document-height growth, and zero root horizontal overflow. Provider-owned content remains cross-origin and requires a separate live sandbox completion check."
       }
+    },
+    {
+      "changeSetId": "v01-action-required-start-over",
+      "path": "src/App.tsx",
+      "contract": "Keep the same-payment status check while exposing the existing Buy Another Ticket escape path when an official provider action is awaiting completion.",
+      "beforeSha256": "sha256:0cfc75b5fc4e69d0dc45b28729806cd349109425a69f603901a94ca255c44f03",
+      "afterSha256": "sha256:f04618efb5a15c520848e440696b7c77215871faef18036a49dbf505957c8da7",
+      "reason": "A returned action-required checkout could present only status reconciliation, leaving a demo reviewer without an explicit fresh-session choice. The new action calls the existing reset boundary and does not alter confirmation, reconciliation, fulfillment, or ticket issuance.",
+      "approvalReference": "user:action-required-session-reset-cta:2026-08-18",
+      "proofIds": ["browser-check:action-required-home-and-reset"],
+      "proof": {
+        "status": "passed",
+        "population": "focused_component_browser",
+        "artifact": "tests/e2e/onsale-checkout-c3.spec.ts",
+        "artifactSha256": "sha256:6eb6a5e61f13bbcccdc2d6c864aa16943f7475d9050a2827ea0d23a362fd73e5",
+        "claimBoundary": "The focused browser check proves the action-required status can return Home and issue the existing reset request. It does not claim to cancel an in-flight provider payment."
+      }
+    },
+    {
+      "changeSetId": "v01-action-required-start-over-layout",
+      "path": "src/index.css",
+      "contract": "Keep the action-required status controls compact, adjacent, and responsive without changing the checkout or provider overlay layout.",
+      "beforeSha256": "sha256:fd4c327cc130e413e47fcf242a0eb06166179033f90ac47625c7baecb2eb5166",
+      "afterSha256": "sha256:2acb670430df9b624110e19ee3f6f6e80df0c18944a8957c73f6e467558ae7d0",
+      "reason": "The reset control belongs beside the existing same-payment status action, not in normal document flow or the provider overlay. The grouping preserves existing button styling and wraps only at narrow widths.",
+      "approvalReference": "user:action-required-session-reset-cta:2026-08-18",
+      "proofIds": ["browser-check:action-required-home-and-reset"],
+      "proof": {
+        "status": "passed",
+        "population": "focused_component_browser",
+        "artifact": "tests/e2e/onsale-checkout-c3.spec.ts",
+        "artifactSha256": "sha256:6eb6a5e61f13bbcccdc2d6c864aa16943f7475d9050a2827ea0d23a362fd73e5",
+        "claimBoundary": "The focused browser check covers visible, operable controls. It does not claim cross-origin provider-content rendering."
+      }
     }
   ]
 }
