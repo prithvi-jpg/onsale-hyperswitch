@@ -538,36 +538,31 @@ body:has(#orca-fullscreen) {
 [id^="orca-fullscreen-iframeRef-"] {
   position: fixed !important;
   inset: 0 !important;
-  width: 0 !important;
-  height: 0 !important;
-  overflow: visible !important;
+  width: 100dvw !important;
+  min-width: 0 !important;
+  height: 100dvh !important;
+  min-height: 0 !important;
+  overflow: hidden !important;
   z-index: 2147483647 !important;
 }
 
 #orca-fullscreen {
   position: fixed !important;
-  inset: 0 auto auto 50% !important;
+  inset: 0 !important;
   display: block !important;
-  width: max(2100px, 100dvw) !important;
-  min-width: max(2100px, 100dvw) !important;
-  max-width: none !important;
+  width: 100dvw !important;
+  min-width: 0 !important;
+  max-width: 100dvw !important;
   height: 100dvh !important;
-  min-height: 100dvh !important;
-  max-height: none !important;
+  min-height: 0 !important;
+  max-height: 100dvh !important;
   margin: 0 !important;
   border: 0 !important;
-  transform: translateX(-50%) !important;
+  transform: none !important;
   z-index: 2147483647 !important;
 }
 
 @media (max-width: 600px) {
-  #orca-fullscreen {
-    inset: 0 !important;
-    width: 100dvw !important;
-    min-width: 100dvw !important;
-    transform: none !important;
-  }
-
   .official-checkout-sandbox-cards > div {
     grid-template-columns: 1fr auto;
   }
