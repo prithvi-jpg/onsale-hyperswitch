@@ -750,14 +750,23 @@ function usableClientSecret(value: unknown): string | null {
 /**
  * Requests only the official Hyperswitch SDK's provider surface. The SDK owns
  * the actual provider URL and retains its top-level redirect fallback.
+ *
+ * Named local origins are eligible for the local review flow. A hosted return
+ * is eligible only when it is HTTPS and is one of the server-configured return
+ * origins that has already passed the exact return-url allowlist.
  */
-export function isOfficialIframeReturnEligibleV1(returnUrl: string): boolean {
+export function isOfficialIframeReturnEligibleV1(
+  returnUrl: string,
+  allowedReturnOrigins: ReadonlySet<string> = new Set(),
+): boolean {
   try {
     const parsed = new URL(returnUrl)
     const localOriginKind = classifyOnsaleLocalOriginV1(parsed.origin)
     return (
       (localOriginKind === "portless_http" ||
-        localOriginKind === "portless_https") &&
+        localOriginKind === "portless_https" ||
+        (parsed.protocol === "https:" &&
+          allowedReturnOrigins.has(parsed.origin))) &&
       parsed.username === "" &&
       parsed.password === "" &&
       parsed.pathname === "/api/onsale/return" &&
@@ -787,7 +796,7 @@ function createBody(
     capture_method: "automatic",
     session_expiry: boundedSessionExpirySeconds(input.sessionExpirySeconds),
     return_url: returnUrl,
-    ...(isOfficialIframeReturnEligibleV1(returnUrl)
+    ...(isOfficialIframeReturnEligibleV1(returnUrl, allowedOrigins)
       ? { is_iframe_redirection_enabled: true }
       : {}),
     description: safeText(input.description, "Payment description", 128),
