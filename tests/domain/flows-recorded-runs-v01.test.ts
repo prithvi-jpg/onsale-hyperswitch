@@ -675,5 +675,16 @@ describe("ONSALE v0.1 durable Recorded Runs boundary", () => {
           query.includes("max(po.received_at)"),
       ),
     ).toBe(true)
+    const paymentProjectionQueries = queries.filter((query) =>
+      query.includes('from "onsale_app_v1"."provider_payment"'),
+    )
+    expect(paymentProjectionQueries).not.toHaveLength(0)
+    expect(
+      paymentProjectionQueries.every(
+        (query) =>
+          query.includes('"prototype_dataset" d') &&
+          query.includes("d.state = 'active'"),
+      ),
+    ).toBe(true)
   })
 })

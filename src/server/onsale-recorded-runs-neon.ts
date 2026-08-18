@@ -431,6 +431,8 @@ export class NeonRecordedRunsRepositoryV1 implements RecordedRunsRepositoryV1 {
               fb.issued_at as ticket_issued_at
        from ${this.#table("provider_payment")} pp
        join ${this.#table("orders")} o on o.id = pp.order_id
+       join ${this.#table("prototype_dataset")} d
+         on d.id = o.dataset_id and d.state = 'active'
        left join ${this.#table("fulfillment_bundle")} fb on fb.payment_id = pp.id
        left join lateral (
          select po.selected_payment_method, po.observed_amount_minor,
@@ -496,6 +498,8 @@ export class NeonRecordedRunsRepositoryV1 implements RecordedRunsRepositoryV1 {
       const candidates = await client.query<{ payment_id: string }>(
         `select pp.id as payment_id from ${this.#table("provider_payment")} pp
          join ${this.#table("orders")} o on o.id = pp.order_id
+         join ${this.#table("prototype_dataset")} d
+           on d.id = o.dataset_id and d.state = 'active'
          ${buyerPredicate}`,
         buyerRef === null ? [] : [buyerRef],
       )
@@ -512,6 +516,8 @@ export class NeonRecordedRunsRepositoryV1 implements RecordedRunsRepositoryV1 {
       const result = await client.query<{ payment_id: string }>(
         `select pp.id as payment_id from ${this.#table("provider_payment")} pp
          join ${this.#table("orders")} o on o.id = pp.order_id
+         join ${this.#table("prototype_dataset")} d
+           on d.id = o.dataset_id and d.state = 'active'
          where o.buyer_ref = $1 and o.id = $2`,
         [buyerRef, orderId],
       )
@@ -533,6 +539,8 @@ export class NeonRecordedRunsRepositoryV1 implements RecordedRunsRepositoryV1 {
                 ) as recorded_at
          from ${this.#table("provider_payment")} pp
          join ${this.#table("orders")} o on o.id = pp.order_id
+         join ${this.#table("prototype_dataset")} d
+           on d.id = o.dataset_id and d.state = 'active'
          left join ${this.#table("fulfillment_bundle")} fb on fb.payment_id = pp.id
          ${buyerPredicate}
          order by recorded_at desc, pp.id desc`,
